@@ -9,7 +9,9 @@ function App() {
         <h1><b>VITABAND</b></h1>
         <h2><b><i>DASHBOARD</i></b></h2>
       </div>
-      <div className="rightpart">hahahah</div>
+      <div className="rightpart">
+      
+            </div>
       
     </div>
   );
