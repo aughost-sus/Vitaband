@@ -10,7 +10,25 @@ function App() {
         <h2><b><i>DASHBOARD</i></b></h2>
       </div>
       <div className="rightpart">
-      
+        <form className="loginform">
+          <input 
+            type="text" 
+            name="Username" 
+            value="Username"
+            className="username"
+            / >
+          <input 
+            type="text" 
+            name="Username" 
+            value="Password"
+            className="password"
+            / >
+          <input 
+            type="submit"
+            className="login"
+            value="LOGIN"
+            />
+        </form>
             </div>
       
     </div>
