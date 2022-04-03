@@ -1,16 +1,15 @@
 import React from 'react'
 import Navbar from '../Navbar/navbar'
-import './homepage.css'
 
 
-const Homepage= () => {
+const Nodedetails= () => {
     return (
         <div className='hahaha'>
             <Navbar />
             { /* start coding here */ }
-            <div className='homepage'> hahaha</div>
+            <div className='homepage'> hahasdasdaha</div>
         </div>
     );
  }
 
-export default Homepage;
+export default Nodedetails;

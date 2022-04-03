@@ -1,0 +1,8 @@
+body {
+    background: white;
+}
+
+.homepage {
+    background: pink;
+    max-height: 100vh;
+}

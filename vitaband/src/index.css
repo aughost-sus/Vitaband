@@ -9,8 +9,6 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: url('../public/LOGIN.png');
-  background-size: cover;
   font-family: 'Open Sans', sans-serif;
 }
 

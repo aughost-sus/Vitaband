@@ -1,0 +1,53 @@
+.navbar {
+    display: flex;
+    background-color: white;
+    height: 75px;
+    box-shadow: 1px 0px 10px #d1d1d1;
+}
+
+.logo {
+    display: flex;
+    max-width: 250px;
+    padding: 10px 25px;
+}
+
+.profile {
+    left:65%;
+    display: flex;
+    width: 100%;
+    position: relative;
+}
+
+.picture {
+    margin-top: 5px;
+    height: 60px;
+    width: 60px;
+    background: red;
+    border-radius: 50%;
+}
+
+.userdetails {
+    display: block;
+    margin: 10px 10px;
+}
+.username {
+    display: block;
+    font-family:'Montserrat', sans-serif;
+    font-weight: bold;
+}
+
+.logout {
+    display: flex;
+    position: relative;
+    background: #080FFF;
+    margin-top: 5px;
+    padding: 5px 28px;
+    width: 100px;
+    height: 25px;
+    border-radius: 24px;
+    border: none;
+    font-family:'Montserrat', sans-serif;
+    color: #FFF;
+    font-size: 12px;
+}
+

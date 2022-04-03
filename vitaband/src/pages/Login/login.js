@@ -30,6 +30,10 @@ const Login = () => {
             /></Link>
         </form>
             <p>Create an account</p>
+            <Link to="/linknode"><button>Node Details</button></Link>
+            <Link to="/homepage"><button>Homepage</button></Link>
+            <Link to="/linknode"><button>LinkNode</button></Link>
+            
         </div>
         </div>
     )
