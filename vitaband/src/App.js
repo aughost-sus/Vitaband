@@ -2,7 +2,6 @@
 import { BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 import Login from "./pages/Login/login";
 import Homepage from './pages/homepage/homepage';
-import './index.css'
 import Linknode from './pages/linkanode/linknode';
 import Nodedetails from './pages/node-details/nodedetails';
 

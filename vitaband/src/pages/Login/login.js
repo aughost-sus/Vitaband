@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import "../Login/login.css"
+import "./login.css"
 
 const Login = () => {
     return (
@@ -30,7 +30,7 @@ const Login = () => {
             /></Link>
         </form>
             <p>Create an account</p>
-            <Link to="/linknode"><button>Node Details</button></Link>
+            <Link to="/nodedetails"><button>Node Details</button></Link>
             <Link to="/homepage"><button>Homepage</button></Link>
             <Link to="/linknode"><button>LinkNode</button></Link>
             

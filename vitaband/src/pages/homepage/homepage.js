@@ -5,10 +5,10 @@ import './homepage.css'
 
 const Homepage= () => {
     return (
-        <div className='hahaha'>
+        <div className='homepage'>
             <Navbar />
             { /* start coding here */ }
-            <div className='homepage'> hahaha</div>
+            <div className='here'> hahaha</div>
         </div>
     );
  }
