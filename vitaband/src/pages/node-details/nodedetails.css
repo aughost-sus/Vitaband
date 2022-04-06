@@ -1,13 +1,15 @@
 .hahaha {
     background: white;
     height: 100vh;
+    
 }
 
 .nodedetails {
-    display: flex;
+    display: block;
     justify-content: center;
     align-items: center;
 }
+
 
 p {
     font-family:'Montserrat', sans-serif;
@@ -25,23 +27,50 @@ p {
 
 .nodedetails .status {
     display: flex;
+    justify-content: center;
+    align-items: center;
     left: 0;
-    width: 80%;
-    height: 100px;
-    border-radius: 30px;
-    background: pink;
-    
+    width: 100%;
+    border-radius: 30px; 
 }
 
+.box {
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+    background: pink;
+    border-radius: 30px;
+    height: 100px;
+}
 
-.status p {
+.patient {
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+    border-radius: 30px;
+    height: 300px;
+}
+
+.patient .pat_info {
+    display: block;
+    width: 60%;
+    left: 0;
+
+}
+.leftside_status {
+    height: 100%;
+    top:0;
+    margin-top: 0;
+    display: flex;
+}
+
+.box p {
     color: white;
     font-size: 20px;
     font-family:'Montserrat', sans-serif;
     left: 0;
-    margin-left: -40px;
     margin-top: 10px;
-
 }
 
 .status span {
@@ -61,21 +90,22 @@ p {
         background: red;
         border-radius: 50%;
         margin-top: 40px;
-        margin-left: 75px;
+        margin-left: 7.5%;
 }
 
-.status .nodename {
-    margin-left: 40%;
+.nodename {
     display: flex;
+    float: right;
+    text-align: right;
+    justify-content: center;
+    align-items: center;
+    margin-right: 10%;
 }
-
 .nodename p {
     color: #575757;
     font-size: 16px;
     font-family:'Montserrat', sans-serif;
-    left: 0;
-    margin-left: 10px;
-    margin-top: 45px;
+    margin-right: 16px;
 }
 
 .nodename span {
@@ -84,6 +114,48 @@ p {
     font-family:'Montserrat', sans-serif;
     font-weight: lighter;
     left: 0;
-    margin-left: 40px;
     margin-top: 0;
+}
+
+.patient p {
+    color: #575757;
+    font-size: 16px;
+    font-family:'Montserrat', sans-serif;
+    font-weight: bold;
+    margin-right: 16px;
+}
+
+.pat_info h1 {
+    color: #575757;
+    font-size: 40px;
+    font-family:'Montserrat', sans-serif;
+    font-weight: bold;
+    margin-left: 95px;
+    margin-bottom: 5px;
+}
+
+.pat_info span {
+    font-family:'Montserrat', sans-serif;
+    color: #575757;
+    font-weight: lighter;
+    font-size: 16px;
+    margin-left: 100px;
+}
+
+#address {
+    font-family:'Montserrat', sans-serif;
+    color: #575757;
+    font-weight: lighter;
+    font-size: 16px;
+    margin-top: 15;
+    margin-left: 0;
+}
+
+#address1 {
+    font-family:'Montserrat', sans-serif;
+    color: #575757;
+    font-weight: lighter;
+    font-size: 16px;
+    margin-top: -10px;
+    margin-left: 0;
 }

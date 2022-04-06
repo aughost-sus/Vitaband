@@ -11,13 +11,18 @@ const Navbar= () => {
         <img src={Logo} 
          className='logo' />
          </div>
+    
          <div className="profile">
-             <div className="picture"></div>
-             <div className="userdetails">
-             <div className="username">Taylor Swift</div>
-             <Link to="/"><button className="logout">Logout</button></Link></div>
+         <div className="picture" />
+         <div className="userdetails">
+         <div className="username">Taylor Swift</div>
+         <Link to="/"><button className="logout">Logout</button></Link>
+         
          </div>
-    </div>
+             
+             </div>
+           
+         </div>
     )
  }
 

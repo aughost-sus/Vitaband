@@ -1,5 +1,7 @@
 .navbar {
     display: flex;
+    justify-content: space-between;
+    align-items: center;
     background-color: white;
     height: 75px;
     box-shadow: 1px 0px 10px #d1d1d1;
@@ -11,14 +13,15 @@
     padding: 10px 25px;
 }
 
-.navbar .profile {
-    right: -65%;
-    display: flex;
-    width: 100%;
+.profile {
+    flex: 1;
+    text-align: right;
     position: relative;
+    right: 50px;
 }
 
 .picture {
+    float: right;
     margin-top: 5px;
     height: 60px;
     width: 60px;
@@ -27,7 +30,7 @@
 }
 
 .userdetails {
-    display: block;
+    display: inline-block;
     margin: 10px 10px;
 }
 .username {
@@ -38,7 +41,7 @@
 
 .logout {
     display: flex;
-    position: relative;
+    float: right;
     background: #080FFF;
     margin-top: 5px;
     padding: 5px 28px;
