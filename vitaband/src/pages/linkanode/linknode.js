@@ -7,7 +7,7 @@ const Linknode= () => {
         <div className='hahaha'>
             <Navbar />
            { /* start coding here */ }
-            <div className='link'> hello testing</div>
+            <div className='link'> hello another testing</div>
         </div>
     );
  }
