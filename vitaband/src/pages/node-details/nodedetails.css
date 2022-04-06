@@ -1,0 +1,89 @@
+.hahaha {
+    background: white;
+    height: 100vh;
+}
+
+.nodedetails {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+p {
+    font-family:'Montserrat', sans-serif;
+    padding-left:100px;
+    font-size: 15px;
+    color: #080FFF;
+}
+
+.icon {
+    position: absolute;
+    font-size: 25px;
+    margin: 13px 75px;
+    color: #080FFF;
+}
+
+.nodedetails .status {
+    display: flex;
+    left: 0;
+    width: 80%;
+    height: 100px;
+    border-radius: 30px;
+    background: pink;
+    
+}
+
+
+.status p {
+    color: white;
+    font-size: 20px;
+    font-family:'Montserrat', sans-serif;
+    left: 0;
+    margin-left: -40px;
+    margin-top: 10px;
+
+}
+
+.status span {
+    color: white;
+    font-size: 20px;
+    font-family:'Montserrat', sans-serif;
+    font-weight: bold;
+    left: 0;
+    margin-left: 10px;
+    margin-top: 45px;
+}
+
+.indicator {
+        position: absolute;
+        height: 40px;
+        width: 40px;
+        background: red;
+        border-radius: 50%;
+        margin-top: 40px;
+        margin-left: 75px;
+}
+
+.status .nodename {
+    margin-left: 40%;
+    display: flex;
+}
+
+.nodename p {
+    color: #575757;
+    font-size: 16px;
+    font-family:'Montserrat', sans-serif;
+    left: 0;
+    margin-left: 10px;
+    margin-top: 45px;
+}
+
+.nodename span {
+    color: #575757;
+    font-size: 5em;
+    font-family:'Montserrat', sans-serif;
+    font-weight: lighter;
+    left: 0;
+    margin-left: 40px;
+    margin-top: 0;
+}
