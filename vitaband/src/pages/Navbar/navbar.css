@@ -11,8 +11,8 @@
     padding: 10px 25px;
 }
 
-.profile {
-    left:65%;
+.navbar .profile {
+    right: -65%;
     display: flex;
     width: 100%;
     position: relative;
