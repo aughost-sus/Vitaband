@@ -33,7 +33,7 @@ const Nodedetails= () => {
                     <span>Complete Address:</span>
                     <p id="address">#510 Kalsadang Bago Caingin San Rafael</p>
                     <p id="address">Sex:<span id="address"> Male</span></p>
-                    <p id="address1">Age:<span id="address1">23 Years old</span></p>
+                    <p id="address1">Age:<span id="address1">23 Yearsz old</span></p>
                     <div className="pat_info">
                     </div>
                     </div>
