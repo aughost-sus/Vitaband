@@ -1,6 +1,6 @@
 .hahaha {
     background: white;
-    height: 100vh;
+    height: 100%;
     
 }
 
@@ -50,6 +50,31 @@ p {
     width: 80%;
     border-radius: 30px;
     height: 300px;
+}
+
+.vitals {
+    margin-top: 10px;
+    display: block;
+    justify-content: space-between;
+    width: 80%;
+    border-radius: 30px;
+    height: 300px;
+   
+}
+
+.graph {
+    margin-top: 10px;
+    display: block;
+    justify-content: space-between;
+    width: 80%;
+    height: 100%;
+    padding: 10px 10px 10px 10px;
+    border-radius: 30px;
+    margin-bottom: 100px;
+    box-shadow:-5px 5px 4px rgba(0, 0, 0, 0.3);
+    -webkit-box-shadow:-8px 5px 4px rgba(0, 0, 0, 0.3);
+    -moz-box-shadow:-10px 10px 4px rgba(0, 0, 0, 0.3);
+    border: solid 1px rgba(41, 41, 41, 0.3); ;
 }
 
 .patient .pat_info {
@@ -158,4 +183,44 @@ p {
     font-size: 16px;
     margin-top: -10px;
     margin-left: 0;
+}
+
+.vitals .display {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.vitals p {
+    color: #080FFF;
+    font-size: 20px;
+    font-family:'Montserrat', sans-serif;
+    font-weight: bold;
+}
+
+.display .vital_box {
+    display: block;
+    text-align: center;
+    height: 125px;
+    width: 20%;
+    border-radius: 24px;
+    margin-left: 30px;
+    box-shadow:-5px 5px 4px rgba(0, 0, 0, 0.3);
+    -webkit-box-shadow:-5px 5px 4px rgba(0, 0, 0, 0.3);
+    -moz-box-shadow:-5px 5px 4px rgba(0, 0, 0, 0.3);
+}
+
+.vital_box h3 {
+    font-family:'Montserrat', sans-serif;
+    color: #575757;
+    font-weight: lighter;
+    font-size: 15px;
+}
+
+.vital_box span {
+    font-family:'Montserrat', sans-serif;
+    color: #575757;
+    font-weight: lighter;
+    font-size: 30px;
 }

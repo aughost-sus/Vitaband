@@ -1,10 +1,33 @@
 import React from 'react'
 import Navbar from '../Navbar/navbar'
 import "../node-details/nodedetails.css"
-import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+import LineChart from '../../components/linechart'
 import {MdKeyboardArrowLeft } from 'react-icons/md'
+import { UserData } from "../../components/Data"
+import { useState } from 'react'
+
 
 const Nodedetails= () => {
+    const [userData, setUserData] = useState({
+        labels: UserData.map((data) => data.year),
+        datasets: [
+          {
+            label: "Users Gained",
+            data: UserData.map((data) => data.userGain),
+            backgroundColor: [
+              "rgba(75,192,192,1)",
+              "#ecf0f1",
+              "#50AF95",
+              "#f3ba2f",
+              "#2a71d0",
+            ],
+            borderColor: "black",
+            borderWidth: 2,
+          },
+        ],
+      });
+
+      
     return (
         <div className='hahaha'>
             <Navbar />
@@ -33,11 +56,39 @@ const Nodedetails= () => {
                     <span>Complete Address:</span>
                     <p id="address">#510 Kalsadang Bago Caingin San Rafael</p>
                     <p id="address">Sex:<span id="address"> Male</span></p>
-                    <p id="address1">Age:<span id="address1">23 Yearsz old</span></p>
-                    <div className="pat_info">
+                    <p id="address1">Age:<span id="address1">23 Yearsz cdold</span></p>
                     </div>
                     </div>
-            </div>
+                    </div>
+            <div className="status">
+                <div className='vitals'>
+                    <p>HEALTH VITALS:</p>
+                    <div className="display">
+                        <div className="vital_box">
+                            <h3>TEMPERATURE:</h3>
+                            <span>hahaha</span>
+                        </div>
+                        <div className="vital_box">
+                            <h3>OXYGEN LEVEL:</h3>
+                            <span>hahaha</span>
+                        </div>
+                        <div className="vital_box">
+                            <h3>PULSE RATE:</h3>
+                            <span>hahaha</span>
+                        </div>
+                        <div className="vital_box">
+                            <h3>COUGH FREQUENCY:</h3>
+                            <span>hahaha</span>
+                        </div>
+                    </div>
+
+                </div>
+                
+            </div>  
+            <div className="status">
+                <div className="graph">
+                <LineChart chartData={userData} />
+                </div>
             </div>
              </div>
              </div>
