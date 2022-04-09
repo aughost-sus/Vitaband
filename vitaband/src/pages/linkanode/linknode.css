@@ -1,0 +1,182 @@
+.linkanode{
+    background-color: white;
+    height: 100vh;
+}
+
+.icon2 {
+    position: absolute;
+    font-size: 25px;
+    margin: -2px 75px;
+    color: #080FFF;    
+}
+
+.toppart{
+    background-color: rgb(255, 255, 255);
+    color: #555555;
+    font-family:'Montserrat', sans-serif;
+    position: absolute;
+    left: 3in;
+    top: 1.5in;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.line{
+    position: relative;
+    top: 80px;
+    border-top: 1px solid rgb(68, 68, 68);
+    width: 14in;
+}
+
+.botpart{
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    top: 100px;
+    left: 3in;
+    width: 14in;
+}
+
+.left{
+    width: 5in;
+}
+
+.box1{
+    background-color: #295dac;
+    border-radius: 30px;
+    position: relative;
+    top: 20px;
+    left: 20px;
+    height: 6in;
+    width: 4in;
+    box-shadow:-5px 5px 4px rgba(0, 0, 0, 0.3);
+}
+
+.right{
+    font-family:'Montserrat', sans-serif;
+    width: 9in;
+    height: 7in;
+}
+
+.patinf{
+    font-weight: 500;
+    font-size: 20px;
+}
+
+.name{
+    padding-top: 30px;
+}
+
+.surname{
+    padding: 0px 4px 0px 10px;
+    margin-top: 10px;
+    border-radius: 15px;
+    height: 25px;
+    width: 2.5in;
+    border-style: solid;
+    margin-right: 15px;
+}
+
+.firstname{
+    padding: 0px 4px 0px 10px;
+    margin-top: 10px;
+    border-radius: 15px;
+    height: 25px;
+    width: 2.5in;
+    border-style: solid;
+    margin-right: 15px;
+}
+
+.middle{
+    padding: 0px 4px 0px 10px;
+    margin-top: 10px;
+    border-radius: 15px;
+    height: 25px;
+    width: 2in;
+    border-style: solid;
+}
+
+.age{
+    margin-top: 20px;
+    margin-left: 10px;
+    margin-right: 40px;
+    border-radius: 15px;
+    height: 25px;
+    width: 1in;
+    border-style: solid;
+}
+
+.femalebtn{
+    margin-left: 30px;
+}
+
+.malebtn{
+    margin-left: 20px;
+}
+
+.address{
+    margin-top: 50px;
+}
+
+.street{
+    margin-top: 20px;
+    margin-right: 15px;
+    border-radius: 15px;
+    height: 25px;
+    width: 1.3in;
+    border-style: solid;
+}
+
+.brgy{
+    margin-top: 20px;
+    margin-right: 15px;
+    border-radius: 15px;
+    height: 25px;
+    width: 3in;
+    border-style: solid;
+}
+
+.municipality{
+    margin-top: 20px;
+    margin-right: 15px;
+    border-radius: 15px;
+    height: 25px;
+    width: 2in;
+    border-style: solid;
+}
+
+.province{
+    margin-top: 20px;
+    border-radius: 15px;
+    height: 25px;
+    width: 1.8in;
+    border-style: solid;
+}
+
+.gpslocation{
+    margin-top: 70px;
+}
+
+.locateicon{
+    position: absolute;
+    color: #080FFF;
+    margin-left: 50px;
+    margin-top: 15px;
+}
+
+.locate{
+    margin-left: 90px;
+    margin-top: 3px;
+}
+
+.linkbtn{
+    color: white;
+    font-family:'Montserrat', sans-serif;
+    background-color: #080FFF;
+    margin-top: 50px;
+    width: 1.5in;
+    height: 0.5in;
+    border-radius: 20px;
+    border: 0;
+    
+}
