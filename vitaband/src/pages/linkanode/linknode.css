@@ -1,60 +1,72 @@
 .linkanode{
+    display: block;
     background-color: white;
-    height: 100vh;
+    height: 100vh ;
+}
+
+.link{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .icon2 {
     position: absolute;
     font-size: 25px;
-    margin: -2px 75px;
+    margin: 12px 75px;
     color: #080FFF;    
 }
 
-.toppart{
+.heading{
+    display: block;
+    width: 70%;
+    left: 0;
     background-color: rgb(255, 255, 255);
     color: #555555;
     font-family:'Montserrat', sans-serif;
-    position: absolute;
-    left: 3in;
-    top: 1.5in;
     font-size: 30px;
     font-weight: bold;
 }
 
 .line{
+    display: flex;
     position: relative;
-    top: 80px;
     border-top: 1px solid rgb(68, 68, 68);
-    width: 14in;
+    width: 70%;
 }
 
-.botpart{
+.main{
     display: flex;
     flex-direction: row;
-    position: relative;
-    top: 100px;
-    left: 3in;
-    width: 14in;
+    justify-items: center;
+    width: 70%;
 }
 
 .left{
-    width: 5in;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 40%;
+    height: 100%;
+    top: 0;
+
 }
 
 .box1{
+    display: flex;
+    justify-content: center;
     background-color: #295dac;
     border-radius: 30px;
-    position: relative;
-    top: 20px;
-    left: 20px;
-    height: 6in;
-    width: 4in;
+    height: 6.5in;
+    width: 80%;
     box-shadow:-5px 5px 4px rgba(0, 0, 0, 0.3);
 }
 
 .right{
     font-family:'Montserrat', sans-serif;
-    width: 9in;
+    width: 60%;
     height: 7in;
 }
 
@@ -63,7 +75,7 @@
     font-size: 20px;
 }
 
-.name{
+.nameinput{
     padding-top: 30px;
 }
 
@@ -72,7 +84,7 @@
     margin-top: 10px;
     border-radius: 15px;
     height: 25px;
-    width: 2.5in;
+    width: 35%;
     border-style: solid;
     margin-right: 15px;
 }
@@ -82,7 +94,7 @@
     margin-top: 10px;
     border-radius: 15px;
     height: 25px;
-    width: 2.5in;
+    width: 35%;
     border-style: solid;
     margin-right: 15px;
 }
@@ -92,7 +104,7 @@
     margin-top: 10px;
     border-radius: 15px;
     height: 25px;
-    width: 2in;
+    width: 19%;
     border-style: solid;
 }
 
@@ -102,7 +114,7 @@
     margin-right: 40px;
     border-radius: 15px;
     height: 25px;
-    width: 1in;
+    width: 12%;
     border-style: solid;
 }
 
@@ -123,7 +135,7 @@
     margin-right: 15px;
     border-radius: 15px;
     height: 25px;
-    width: 1.3in;
+    width: 20%;
     border-style: solid;
 }
 
@@ -132,7 +144,7 @@
     margin-right: 15px;
     border-radius: 15px;
     height: 25px;
-    width: 3in;
+    width: 40%;
     border-style: solid;
 }
 
@@ -141,7 +153,7 @@
     margin-right: 15px;
     border-radius: 15px;
     height: 25px;
-    width: 2in;
+    width: 31.4%;
     border-style: solid;
 }
 
@@ -149,7 +161,7 @@
     margin-top: 20px;
     border-radius: 15px;
     height: 25px;
-    width: 1.8in;
+    width: 25%;
     border-style: solid;
 }
 

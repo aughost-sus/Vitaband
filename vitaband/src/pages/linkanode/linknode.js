@@ -10,35 +10,39 @@ const Linknode= () => {
         <div className='linkanode'>
             <Navbar />
            { /* start coding here */ }
+           <MdKeyboardArrowLeft className='icon2'/><p>Back to Home</p>
             <div className='link'>
-                <MdKeyboardArrowLeft className='icon2'/><p>Back to Home</p>
-                <div className="toppart">
-                    Link a Node
-                </div>
+                <span className="heading">Link a Node</span>
                 <hr className="line" /><br/>
-                <div className="botpart">
+                <div className="main">
                     <div className="left">left
                         <div className="box1">hi</div>
                     </div>
                     <div className="right">
                         <div className="patinf">Patient Information</div>
-                        <div className="name">
-                            Name: <br/>
-                            <input type="name" className='surname' placeholder=' Surname'/>
-                            <input type="name" className='firstname' placeholder=' First Name'/>
-                            <input type="name" className='middle' placeholder=' Middle Name'/>
+                        <div className="nameinput">
+                            <form action="">
+                                Name: <br/>
+                                <input type="name" className='surname' placeholder=' Surname'/>
+                                <input type="name" className='firstname' placeholder=' First Name'/>
+                                <input type="name" className='middle' placeholder=' Middle Name'/>
+                            </form>
                         </div>
                         <div className="ageandsex">
-                            Age: <input type="Age" className='age'/>
-                            Sex:    <input type="radio" className='malebtn'/>  Male
-                                    <input type="radio" className='femalebtn'/>  Female
+                            <form action="">
+                                Age: <input type="Age" className='age'/>
+                                Sex:    <input type="radio" className='malebtn'/>  Male
+                                        <input type="radio" className='femalebtn'/>  Female
+                            </form>
                         </div>
                         <div className="address">
+                            <form action="">
                             Complete Address: <br/>
-                            <input type="name" className='street' placeholder=' House #, Street'/>
-                            <input type="name" className='brgy' placeholder=' Baranggay'/>
-                            <input type="name" className='municipality' placeholder=' City Municipality'/>
-                            <input type="name" className='province' placeholder=' Province'/>
+                                <input type="name" className='street' placeholder=' House #, Street'/>
+                                <input type="name" className='brgy' placeholder=' Baranggay'/>
+                                <input type="name" className='municipality' placeholder=' City Municipality'/>
+                                <input type="name" className='province' placeholder=' Province'/>
+                            </form>
                         </div>
                         <div className="gpslocation">
                             GPS Location: <br/>
