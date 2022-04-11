@@ -33,7 +33,6 @@ const Nodedetails= () => {
             <Navbar />
             { /* start coding here */ }
             <MdKeyboardArrowLeft className='icon'/><p>Back to Home</p>
-            <div className="nodemother">
             <div className='nodedetails'> 
             <div className="status">
                 <div className="box">
@@ -91,7 +90,7 @@ const Nodedetails= () => {
                 </div>
             </div>
              </div>
-             </div>
+            
 
            
         </div>
