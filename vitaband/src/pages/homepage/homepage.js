@@ -25,161 +25,161 @@ const Homepage = () => {
             <div className="nodegrid">
               <div className="Row1">
                 <div className="Box1">
-                  <div className="left"> NODE 01</div>
-                  <div className="right">
-                    Castro, Ivy Marisse <br></br>
-                    <br></br>
-                    Hagonoy, Bulacan <br></br>
-                    Female <br></br>
-                    22 Years Old <br></br>
-                    <br></br>
-                    <br></br>
-                    <br></br>
-                    <br></br>
-                    <br></br>
-                    <br></br>
-                    Added: 4/13/2022
+                  <div className="left">
+                    <span>NODE</span>
+                    <h2 className="node_id">01</h2>
                   </div>
+                  <div className="right">
+                    <div className="name">
+                      <span>Castro, Ivy Marisse </span><br /> 
+                      Calumpit, Bulacan <br />
+                      Female <br />
+                      25 years old <br />
+                  </div>
+                  <div className="dateadded">
+                    Added on blablabal
+                  </div>
+                </div>
                 </div>
                 <div className="Box1">
-                  <div className="left"> NODE 02</div>
+                  <div className="left">
+                    <span>NODE</span>
+                    <h2 className="node_id">01</h2>
+                  </div>
                   <div className="right">
-                    Castro, Ivy Marisse <br></br>
-                    <br></br>
-                    Hagonoy, Bulacan <br></br>
-                    Female <br></br>
-                    22 Years Old <br></br>
-                    <br></br>
-                    <br></br>
-                    <br></br>
-                    <br></br>
-                    <br></br>
-                    <br></br>
-                    Added: 4/13/2022
+                    <div className="name">
+                      <span>Castro, Ivy Marisse </span><br /> 
+                      Calumpit, Bulacan <br />
+                      Female <br />
+                      25 years old <br />
+                  </div>
+                  <div className="dateadded">
+                    Added on blablabal
                   </div>
                 </div>
-                <div className="Box1" id="box3">
-                  <div className="left"> NODE 03</div>
-                  <div className="right">
-                    Castro, Ivy Marisse <br></br>
-                    <br></br>
-                    Hagonoy, Bulacan <br></br>
-                    Female <br></br>
-                    22 Years Old <br></br>
-                    <br></br>
-                    <br></br>
-                    <br></br>
-                    <br></br>
-                    <br></br>
-                    <br></br>
-                    Added: 4/13/2022
+                </div>
+                <div className="Box1">
+                  <div className="left">
+                    <span>NODE</span>
+                    <h2 className="node_id">01</h2>
                   </div>
+                  <div className="right">
+                    <div className="name">
+                      <span>Castro, Ivy Marisse </span><br /> 
+                      Calumpit, Bulacan <br />
+                      Female <br />
+                      25 years old <br />
+                  </div>
+                  <div className="dateadded">
+                    Added on blablabal
+                  </div>
+                </div>
                 </div>
               </div>
               <div className="Row1">
-                <div className=" Box1">
-                  <div className="left"> NODE 04</div>
-                  <div className="right">
-                    Castro, Ivy Marisse <br></br>
-                    <br></br>
-                    Hagonoy, Bulacan <br></br>
-                    Female <br></br>
-                    22 Years Old <br></br>
-                    <br></br>
-                    <br></br>
-                    <br></br>
-                    <br></br>
-                    <br></br>
-                    <br></br>
-                    Added: 4/13/2022
+                <div className="Box1">
+                  <div className="left">
+                    <span>NODE</span>
+                    <h2 className="node_id">01</h2>
                   </div>
+                  <div className="right">
+                    <div className="name">
+                      <span>Castro, Ivy Marisse </span><br /> 
+                      Calumpit, Bulacan <br />
+                      Female <br />
+                      25 years old <br />
+                  </div>
+                  <div className="dateadded">
+                    Added on blablabal
+                  </div>
+                </div>
                 </div>
                 <div className="Box1">
-                  <div className="left"> NODE 05</div>
+                  <div className="left">
+                    <span>NODE</span>
+                    <h2 className="node_id">01</h2>
+                  </div>
                   <div className="right">
-                    Castro, Ivy Marisse <br></br>
-                    <br></br>
-                    Hagonoy, Bulacan <br></br>
-                    Female <br></br>
-                    22 Years Old <br></br>
-                    <br></br>
-                    <br></br>
-                    <br></br>
-                    <br></br>
-                    <br></br>
-                    <br></br>
-                    Added: 4/13/2022
+                    <div className="name">
+                      <span>Castro, Ivy Marisse </span><br /> 
+                      Calumpit, Bulacan <br />
+                      Female <br />
+                      25 years old <br />
+                  </div>
+                  <div className="dateadded">
+                    Added on blablabal
                   </div>
                 </div>
-                <div className="Box1" id="box3">
-                  <div className="left"> NODE 06</div>
-                  <div className="right">
-                    Castro, Ivy Marisse <br></br>
-                    <br></br>
-                    Hagonoy, Bulacan <br></br>
-                    Female <br></br>
-                    22 Years Old <br></br>
-                    <br></br>
-                    <br></br>
-                    <br></br>
-                    <br></br>
-                    <br></br>
-                    <br></br>
-                    Added: 4/13/2022
+                </div>
+                <div className="Box1">
+                  <div className="left">
+                    <span>NODE</span>
+                    <h2 className="node_id">01</h2>
                   </div>
+                  <div className="right">
+                    <div className="name">
+                      <span>Castro, Ivy Marisse </span><br /> 
+                      Calumpit, Bulacan <br />
+                      Female <br />
+                      25 years old <br />
+                  </div>
+                  <div className="dateadded">
+                    Added on blablabal
+                  </div>
+                </div>
                 </div>
               </div>
               <div className="Row1">
-                <div className=" Box1">
-                  <div className="left"> NODE 07</div>
-                  <div className="right">
-                    Castro, Ivy Marisse <br></br>
-                    <br></br>
-                    Hagonoy, Bulacan <br></br>
-                    Female <br></br>
-                    22 Years Old <br></br>
-                    <br></br>
-                    <br></br>
-                    <br></br>
-                    <br></br>
-                    <br></br>
-                    <br></br>
-                    Added: 4/13/2022
+                <div className="Box1">
+                  <div className="left">
+                    <span>NODE</span>
+                    <h2 className="node_id">01</h2>
                   </div>
+                  <div className="right">
+                    <div className="name">
+                      <span>Castro, Ivy Marisse </span><br /> 
+                      Calumpit, Bulacan <br />
+                      Female <br />
+                      25 years old <br />
+                  </div>
+                  <div className="dateadded">
+                    Added on blablabal
+                  </div>
+                </div>
                 </div>
                 <div className="Box1">
-                  <div className="left"> NODE 08</div>
+                  <div className="left">
+                    <span>NODE</span>
+                    <h2 className="node_id">01</h2>
+                  </div>
                   <div className="right">
-                    Castro, Ivy Marisse <br></br>
-                    <br></br>
-                    Hagonoy, Bulacan <br></br>
-                    Female <br></br>
-                    22 Years Old <br></br>
-                    <br></br>
-                    <br></br>
-                    <br></br>
-                    <br></br>
-                    <br></br>
-                    <br></br>
-                    Added: 4/13/2022
+                    <div className="name">
+                      <span>Castro, Ivy Marisse </span><br /> 
+                      Calumpit, Bulacan <br />
+                      Female <br />
+                      25 years old <br />
+                  </div>
+                  <div className="dateadded">
+                    Added on blablabal
                   </div>
                 </div>
-                <div className="Box1" id="box3">
-                  <div className="left"> NODE 09</div>
-                  <div className="right">
-                    Castro, Ivy Marisse <br></br>
-                    <br></br>
-                    Hagonoy, Bulacan <br></br>
-                    Female <br></br>
-                    22 Years Old <br></br>
-                    <br></br>
-                    <br></br>
-                    <br></br>
-                    <br></br>
-                    <br></br>
-                    <br></br>
-                    Added: 4/13/2022
+                </div>
+                <div className="Box1">
+                  <div className="left">
+                    <span>NODE</span>
+                    <h2 className="node_id">01</h2>
                   </div>
+                  <div className="right">
+                    <div className="name">
+                      <span>Castro, Ivy Marisse </span><br /> 
+                      Calumpit, Bulacan <br />
+                      Female <br />
+                      25 years old <br />
+                  </div>
+                  <div className="dateadded">
+                    Added on blablabal
+                  </div>
+                </div>
                 </div>
               </div>
             </div>
