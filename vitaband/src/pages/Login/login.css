@@ -47,11 +47,15 @@ body {
 
 .rightpart{
   flex-grow: 1;
-  text-align: center;
+  display: block;
+}
+
+.rightpart .right_box {
+  width: 100%;
   display: flex;
   justify-content: center;
-  align-items: center;
   align-content: center;
+  align-items: center;
 }
 
 .loginform {
@@ -94,8 +98,10 @@ body {
 }
 
 .createaccount {
-  position:absolute;
-  top: 52%;
+  position:relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .rightpart p{
