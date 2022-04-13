@@ -47,21 +47,51 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+    align-items: left;
     width: 40%;
     height: 100%;
     top: 0;
+    font-family:'Montserrat', sans-serif;
+}
 
+.left .nodeid {
+    margin-left: 60px;
+}
+
+.nodeidinput{
+    margin-left: 10px;
+    margin-bottom: 20px;
+    border: 0;
+    border-bottom: 1px solid black;
+    width: 15%;
 }
 
 .box1{
+    align-items: center;
+    color: white;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: 0;
     background-color: #295dac;
     border-radius: 30px;
     height: 6.5in;
     width: 80%;
     box-shadow:-5px 5px 4px rgba(0, 0, 0, 0.3);
+    align-self: center;
+    font-size: 25px;
+}
+
+.box1 div{
+    /* position: relative; */
+    padding-top: 80px;
+
+}
+.nodenum{
+    justify-content: center;
+    margin-top: 100px;
+    font-family:'Montserrat', sans-serif;
+    font-size: 150px;
+    color: white;
 }
 
 .right{

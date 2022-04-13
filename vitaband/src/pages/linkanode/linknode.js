@@ -15,34 +15,40 @@ const Linknode= () => {
                 <span className="heading">Link a Node</span>
                 <hr className="line" /><br/>
                 <div className="main">
-                    <div className="left">left
-                        <div className="box1">hi</div>
+                    <div className="left">
+                        <div className='nodeid'>
+                            Node ID:
+                            <input type="number" placeholder='' className='nodeidinput'/>
+                        </div>
+                        <div className="box1">
+                            <div>
+                                NODE
+                            </div>
+                            <span className='nodenum'>
+                                03
+                            </span>
+                        </div>
                     </div>
                     <div className="right">
                         <div className="patinf">Patient Information</div>
+                    <form className='datainput'>
                         <div className="nameinput">
-                            <form action="">
-                                Name: <br/>
-                                <input type="name" className='surname' placeholder=' Surname'/>
-                                <input type="name" className='firstname' placeholder=' First Name'/>
-                                <input type="name" className='middle' placeholder=' Middle Name'/>
-                            </form>
+                            Name: <br/>
+                                    <input type="name" className='surname' placeholder=' Surname'/>
+                                    <input type="name" className='firstname' placeholder=' First Name'/>
+                                    <input type="name" className='middle' placeholder=' Middle Name'/>
                         </div>
                         <div className="ageandsex">
-                            <form action="">
                                 Age: <input type="Age" className='age'/>
                                 Sex:    <input type="radio" className='malebtn'/>  Male
                                         <input type="radio" className='femalebtn'/>  Female
-                            </form>
                         </div>
                         <div className="address">
-                            <form action="">
                             Complete Address: <br/>
                                 <input type="name" className='street' placeholder=' House #, Street'/>
                                 <input type="name" className='brgy' placeholder=' Baranggay'/>
                                 <input type="name" className='municipality' placeholder=' City Municipality'/>
                                 <input type="name" className='province' placeholder=' Province'/>
-                            </form>
                         </div>
                         <div className="gpslocation">
                             GPS Location: <br/>
@@ -50,7 +56,8 @@ const Linknode= () => {
                             <br/>
                             <div className="locate">Locate</div>
                         </div>
-                        <button className='linkbtn'>Link</button>
+                            <input type="submit" className='linkbtn' placeholder=' hi'/>
+                    </form>
                     </div>
                 </div>
             </div>

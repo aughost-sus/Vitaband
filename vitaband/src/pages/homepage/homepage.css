@@ -1,6 +1,53 @@
-
-
 .homepage {
+    display: block;
+}
+
+.nodelist {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.nodelist .nodegrid {
+    display: block;
+    align-items: center;
+    justify-content: center;
+    width: 80%;
+
+}
+.nodegrid .Row1{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
     background: pink;
-    max-height: 100vh;
+    margin-bottom: 25px;
+}
+.Row1 .Box1 {
+    width: 25%;
+    background: white;
+    margin-right: 25px;
+    height: 250px;
+    display: flex;
+    box-shadow:-5px 5px 4px rgba(0, 0, 0, 0.3);
+    -webkit-box-shadow:-8px 5px 4px rgba(0, 0, 0, 0.3);
+    -moz-box-shadow:-10px 10px 4px rgba(0, 0, 0, 0.3);
+    border-radius: 24px;
+    text-align: center;
+}
+#box3 {
+    margin-right: -25px;
+}
+.Box1 .left{
+    width: 30%;
+  
+    
+}
+.Box1 .right{
+    flex-grow: 1;
+
+
+  
+
 }
