@@ -3,11 +3,13 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../../shared/contexts/AuthContext";
 import API from "../../utils/API";
 import "./login.css";
+import logo from '../../images/Logo_whole.png' 
 
 const Login = () => {
   const auth = useContext(AuthContext);
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
+  console.log(logo);
 
   const loginHandler = async (e) => {
     e.preventDefault();
@@ -21,9 +23,10 @@ const Login = () => {
     <div className="login">
       <div className="leftpart">
         <span>WELCOME TO THE</span>
-        <h1>
-          <b>VITABAND</b>
-        </h1>
+        <div className="image">
+        <img src={logo} />
+        </div>
+        <br /><br /> <br />
         <h2>
           <b>
             <i>DASHBOARD</i>

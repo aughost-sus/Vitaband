@@ -13,14 +13,22 @@ body {
   display: flex;
 
 }
+
+.leftpart .image{
+  width: 80%;
+}
+
+.image img {
+  width: 100%;
+}
+
+
 .leftpart{
   top: 15em;
   left: 5em;
   position: relative;
   width: 50%;
-  justify-content: center;
-  align-items: center;
-  align-content: center;
+  display: block;
   font-family: 'Open Sans', sans-serif;
 }
 
