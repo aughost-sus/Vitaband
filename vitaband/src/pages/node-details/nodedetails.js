@@ -29,15 +29,7 @@ const Nodedetails = ({ nodeId = "623a8a2d96e50a184bd22cc0" }) => {
     ],
   });
 
-  useEffect(async () => {
-    const response = await API.getNode(nodeId);
-    if (response.status === 200) {
-      setNodeDetails(response.data.data);
-      console.log(response.data.data);
-    } else {
-      console.log("Failed to fetch data");
-    }
-  }, []);
+  useEffect(() => API.getNode(nodeId, setNodeDetails), []);
 
   const socketHandler = (data) => {
     //TODO: To be implemented later

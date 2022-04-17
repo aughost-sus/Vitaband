@@ -12,7 +12,6 @@ const requestAxios = async (
     let response = false;
 
     const storedData = JSON.parse(localStorage.getItem(LS_USER_DATA));
-    console.log(">>>>", localStorage.getItem(LS_USER_DATA))
     let token = storedData?.token || false;
 
     let headers = {
@@ -69,9 +68,13 @@ const signup = async (firstname, lastname, email, password) => {
   return response;
 };
 
-const getNodes = async () => {
-  let response = await requestAxios("/nodes");
-  return response;
+const getNodes = async (setNodes, setTotalNodes, page) => {
+  let response = await requestAxios(`/nodes?page=${page}`);
+  if (response.status === 200) {
+    setNodes(response.data.data.nodes);
+    setTotalNodes(response.data.data.totalItems);
+    console.log(response.data.data);
+  }
 };
 
 const addNode = async (nodeSerial, patient) => {
@@ -79,9 +82,14 @@ const addNode = async (nodeSerial, patient) => {
   return response;
 };
 
-const getNode = async (nodeId) => {
+const getNode = async (nodeId, setNodeDetails) => {
   let response = await requestAxios(`/nodes/${nodeId}`);
-  return response;
+  if (response.status === 200) {
+    setNodeDetails(response.data.data);
+    console.log(response.data.data);
+  } else {
+    console.log("Failed to fetch data");
+  }
 };
 
 const editNode = async (nodeSerial, patient, nodeId) => {
