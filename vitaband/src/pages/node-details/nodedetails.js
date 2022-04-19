@@ -7,6 +7,7 @@ import { UserData } from "../../components/Data";
 import { useState } from "react";
 import API from "../../utils/API";
 import { useSocket } from "../../shared/hooks/useSocket";
+import { Link } from "react-router-dom";
 
 const Nodedetails = ({ nodeId = "623a8a2d96e50a184bd22cc0" }) => {
   const [nodeDetails, setNodeDetails] = useState(null);
@@ -43,7 +44,7 @@ const Nodedetails = ({ nodeId = "623a8a2d96e50a184bd22cc0" }) => {
       <Navbar />
       {/* start coding here */}
       <MdKeyboardArrowLeft className="icon" />
-      <p>Back to Home</p>
+      <Link to="/homepage" style={{ textDecoration: 'none' }}><p>Back to Home</p></Link>
       <div className="nodedetails">
         <div className="status">
           <div className="box">
