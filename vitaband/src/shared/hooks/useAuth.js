@@ -30,6 +30,7 @@ export const useAuth = () => {
     setLastname(lastname);
     setFirstname(firstname);
     setToken(token);
+    navigate("/");
   }, []);
 
   const logout = useCallback(() => {
@@ -39,7 +40,7 @@ export const useAuth = () => {
     setFirstname(null);
     setLastname(null);
     localStorage.removeItem(LS_USER_DATA);
-    navigate.push("/");
+    navigate("/");
   }, []);
 
   useEffect(() => {

@@ -1,16 +1,9 @@
-.navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: white;
-    height: 75px;
-    box-shadow: 1px 0px 10px #d1d1d1;
+.logo {
+    flex-grow: 1;
 }
 
-.logo {
-    display: flex;
-    max-width: 250px;
-    padding: 10px 25px;
+.logo img {
+    height: 100%;
 }
 
 .profile {
@@ -21,20 +14,19 @@
 }
 
 .picture {
-    float: right;
-    margin-top: 5px;
-    height: 60px;
-    width: 60px;
+    height: 3rem;
+    width: 3rem;
     background: red;
     border-radius: 50%;
 }
 
 .userdetails {
-    display: inline-block;
-    margin: 10px 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    margin-right: 1rem;
 }
 .username {
-    display: block;
     font-family:'Montserrat', sans-serif;
     font-weight: bold;
 }

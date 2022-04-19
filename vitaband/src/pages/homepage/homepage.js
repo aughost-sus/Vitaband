@@ -1,56 +1,181 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import API from "../../utils/API";
 import Navbar from "../Navbar/navbar";
 import "./homepage.css";
-import { Link, Navigate, useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import {
+  Alert,
+  Box,
+  Button,
+  Container,
+  Grid,
+  InputAdornment,
+  LinearProgress,
+  Snackbar,
+  Stack,
+  TextField,
+  Typography,
+} from "@mui/material";
+import { AddCircle, LinkRounded } from "@mui/icons-material";
+import { GrSearch } from "react-icons/gr";
+import { SnackbarContext } from "../../shared/contexts/SnackbarContext";
+import { LoadingContext } from "../../shared/contexts/LoadingContext";
+import AddNodeModal from "./AddNodeModal";
 
 const Homepage = () => {
   const [nodes, setNodes] = useState([]);
+  const [open, setOpen] = React.useState(false);
   const [totalNodes, setTotalNodes] = useState(0);
   const [page, setPage] = useState(1);
-  const navigate = useNavigate ();
-  const navigateTo = () => navigate('/nodedetails');
+  const [query, setQuery] = useState("");
+  const navigate = useNavigate();
+  const { snackbarParams, snackbarDispatch } = useContext(SnackbarContext);
+  const { loadingParams, loadingDispatch } = useContext(LoadingContext);
 
-  useEffect(() => API.getNodes(setNodes, setTotalNodes, page), [page]);
+  useEffect(
+    () =>
+      API.getNodes(
+        setNodes,
+        setTotalNodes,
+        page,
+        loadingDispatch,
+        snackbarDispatch,
+        query
+      ),
+    [page, query]
+  );
 
-  
+  const handleOpen = (scrap) => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const appendNode = (node) => {
+    setNodes([node, ...nodes]);
+  };
+
+  const searchHandler = (e) => {
+    setQuery(e.target.value);
+  };
+
+  const addNodeHandler = (node) => {
+    API.addNode(
+      node,
+      loadingDispatch,
+      snackbarDispatch,
+      handleClose,
+      appendNode
+    );
+  };
+
   return (
-    <div className="hahaha">
+    <Box>
+      {loadingParams.isOpen && <LinearProgress />}
       <Navbar />
-      <div className="here">
-        <div className="homepage">
-          <div className="nodelist">
-            <div className="nodegrid">
-              <div className="Row1">
-                {nodes.length !== 0 &&
-                  nodes.map((node) => (
-                    <div className="Box1" onClick={navigateTo}>
-                      <div className="left">
-                        <span>NODE</span>
-                        <h2 className="node_id">{node.nodeSerial}</h2>
+      <Container>
+        <Grid container spacing={2}>
+          <Grid item xs={12}>
+            <Stack direction="row" sx={{ padding: "1rem" }}>
+              <Typography
+                variant="h6"
+                sx={{ flexGrow: 1, marginRight: "1rem" }}
+              >
+                Select a Node to See Details
+              </Typography>
+              <Button
+                variant="text"
+                onClick={handleOpen}
+                startIcon={<AddCircle />}
+              >
+                Add a Node
+              </Button>
+              <Button
+                variant="text"
+                onClick={() => navigate('/linknode')}
+                startIcon={<LinkRounded />}
+              >
+                Link a Node
+              </Button>
+            </Stack>
+            <input
+              type="text"
+              className="form-field"
+              onChange={searchHandler}
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <Grid container spacing={2}>
+              {nodes.length !== 0 &&
+                nodes.map((node) => (
+                  <Grid item xs={12} sm={6} md={4} lg={3} key={node.nodeSerial}>
+                    <div
+                      className="node-card"
+                      onClick={() => navigate(`/nodedetails/${node._id}`)}
+                    >
+                      <div className="card-header">
+                        <div>NODE</div>
+                        <h1 className="node_id">{node.nodeSerial}</h1>
                       </div>
-                      <div className="right">
-                        <div className="name">
-                          <span>{`${node.patient.firstname} ${node.patient.lastname}`}</span>
-                          <br />
-                          {node.patient.address} <br />
-                          {node.patient.isMale ? "Male" : "Female"} <br />
-                          {node.patient.age} years old <br />
-                        </div>
-                        <div className="dateadded"><span>{`Added on ${new Date(node.createdAt).toLocaleString()}`}</span></div>
+                      <div className="card-content">
+                        {node.patient && (
+                          <>
+                            <h3>{`${node.patient.firstname} ${node.patient.lastname}`}</h3>
+                            <h5>{node.patient.address}</h5>
+                            <h5>{node.patient.isMale ? "Male" : "Female"}</h5>
+                            <h5>{node.patient.age} years old</h5>
+                            <div className="dateadded">
+                              {`Added on ${new Date(
+                                node.createdAt
+                              ).toLocaleString()}`}
+                            </div>
+                          </>
+                        )}
+                        {!node.patient && (
+                          <>
+                            <h3 style={{ color: "grey" }}>
+                              No Patient Associated
+                            </h3>
+                            <div className="dateadded">
+                              {`Added on ${new Date(
+                                node.createdAt
+                              ).toLocaleString()}`}
+                            </div>
+                          </>
+                        )}
                       </div>
-        
                     </div>
-                  
-                  ))}
-                  
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+                  </Grid>
+                ))}
+            </Grid>
+          </Grid>
+        </Grid>
+      </Container>
+      <AddNodeModal
+        open={open}
+        handleClose={handleClose}
+        handleSubmit={addNodeHandler}
+      />
+      <Snackbar
+        anchorOrigin={{
+          vertical: snackbarParams.vertical,
+          horizontal: snackbarParams.horizontal,
+        }}
+        open={snackbarParams.isOpen}
+        autoHideDuration={snackbarParams.duration}
+        onClose={() => snackbarDispatch({ type: "SET_SHOW", payload: false })}
+      >
+        <Alert
+          onClose={() => snackbarDispatch({ type: "SET_SHOW", payload: false })}
+          severity={snackbarParams.severity}
+          variant="filled"
+        >
+          {snackbarParams.message}
+        </Alert>
+      </Snackbar>
+    </Box>
   );
 };
 

@@ -3,7 +3,7 @@
 
 body {
   margin: 0;
-  background: url('../../images/LOGIN.png');
+  /* background: url('../../images/LOGIN.png'); */
   background-size: cover;
   font-family: 'Open Sans', sans-serif;
 }
@@ -66,43 +66,26 @@ body {
   align-items: center;
 }
 
-.loginform {
-  margin-top: 35%;
-  display: block;
-  width: 45%;
-  text-align: center;
-}
-
-.loginform .username {
+.form-field {
   width: 100%;
-  height: 25px;
-  border-radius: 24px;
-  margin-bottom: 10px;
+  height: 2rem;
+  border-radius: 2rem;
+  margin-bottom: 1rem;
   border-style: solid;
+  box-sizing: border-box;
+  padding: 0rem 0.6rem;
 }
 
-.loginform .password {
+.form-button {
   width: 100%;
-  height: 25px;
-  border-radius: 24px;
-  border-style: solid;
-  margin-bottom: 10px;
-}
-
-.loginform .login {
-  min-width: 100%;
-  max-width: 100%;
-  height: 30px;
-  border-radius: 24px;
+  height: 2rem;
+  border-radius: 2rem;
   border-style: none;
-  align-items: center;
   text-align: center;
-  align-content: center;
   background: #080FFF;
   font-family: 'Open Sans', sans-serif;
   color: #fff;
-  font-size: 16px;
-  text-decoration: none;
+  margin-bottom: 1rem;
 }
 
 .createaccount {

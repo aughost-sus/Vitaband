@@ -1,3 +1,4 @@
+import { responsiveFontSizes } from "@mui/material";
 import axios from "axios";
 import { API_URL, LS_USER_DATA } from "./constants";
 
@@ -34,7 +35,7 @@ const requestAxios = async (
     }
   } catch (err) {
     console.log(err);
-    console.error("HTTP request failed", err, );
+    console.error("HTTP request failed", err);
     return false;
   }
 };
@@ -68,18 +69,69 @@ const signup = async (firstname, lastname, email, password) => {
   return response;
 };
 
-const getNodes = async (setNodes, setTotalNodes, page) => {
-  let response = await requestAxios(`/nodes?page=${page}`);
+const getNodes = async (
+  setNodes,
+  setTotalNodes,
+  page,
+  loadingDispatch,
+  snackbarDispatch,
+  query
+) => {
+  loadingDispatch({ type: "SET_PARAMS", payload: { isOpen: true } });
+  let response = await requestAxios(`/nodes?page=${page}&&query=${query}&&target=nodeSerial`);
   if (response.status === 200) {
     setNodes(response.data.data.nodes);
     setTotalNodes(response.data.data.totalItems);
     console.log(response.data.data);
+  } else {
+    snackbarDispatch({
+      type: "SET_PARAMS",
+      payload: {
+        message: "Failed to load Nodes",
+        isOpen: true,
+        severity: "error",
+      },
+    });
   }
+  loadingDispatch({ type: "SET_PARAMS", payload: { isOpen: false } });
 };
 
-const addNode = async (nodeSerial, patient) => {
-  let response = await requestAxios("/nodes", { nodeSerial, patient }, "POST");
-  return response;
+const addNode = async (
+  node,
+  loadingDispatch,
+  snackbarDispatch,
+  handleClose,
+  appendNode
+) => {
+  loadingDispatch({ type: "SET_PARAMS", payload: { isOpen: true } });
+  let response = await requestAxios(
+    "/nodes",
+    { nodeSerial: node.nodeSerial, patient: node.patient },
+    "POST"
+  );
+  if (response.status === 200) {
+    console.log(response);
+    appendNode(response.data.data);
+    snackbarDispatch({
+      type: "SET_PARAMS",
+      payload: {
+        message: "Node Added",
+        isOpen: true,
+        severity: "success",
+      },
+    });
+  } else {
+    snackbarDispatch({
+      type: "SET_PARAMS",
+      payload: {
+        message: "Failed to add node",
+        isOpen: true,
+        severity: "error",
+      },
+    });
+  }
+  handleClose();
+  loadingDispatch({ type: "SET_PARAMS", payload: { isOpen: false } });
 };
 
 const getNode = async (nodeId, setNodeDetails) => {
