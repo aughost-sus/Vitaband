@@ -37,13 +37,6 @@ const Homepage = () => {
     setQuery(e.target.value);
   };
 
-  var x = 0;
-
-  if (x <= 0) {
-    x += 1;
-  } else {
-    document.getElementById("card-header").className += " card-header-active";
-  }
 
   return (
     <motion.div
