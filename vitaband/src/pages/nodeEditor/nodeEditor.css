@@ -1,0 +1,205 @@
+.linkanode {
+  display: block;
+  background-color: white;
+  height: 100vh;
+}
+
+.chevron {
+  font-size: 1.5rem;
+  color: #080fff;
+}
+
+.back_button_label {
+  padding: 0;
+  margin: 0;
+}
+
+.heading {
+  display: block;
+  width: 100%;
+  left: 0;
+  background-color: rgb(255, 255, 255);
+  color: #555555;
+  font-family: "Montserrat", sans-serif;
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.line {
+  display: flex;
+  position: relative;
+  border-top: 1px solid rgb(68, 68, 68);
+  width: 100%;
+}
+
+.main {
+  display: flex;
+  flex-direction: row;
+  justify-items: center;
+  width: 70%;
+}
+
+.left {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: left;
+  width: 40%;
+  height: 100%;
+  top: 0;
+  font-family: "Montserrat", sans-serif;
+}
+
+/* .left .nodeid {
+    margin-left: 60px;
+} */
+
+.nodeid {
+  align-self: flex-start;
+  padding: 0rem 1rem;
+}
+
+.form-input {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 0.5rem;
+}
+
+.node-form-field {
+  height: 2rem;
+  border-radius: 2rem;
+  border-style: solid;
+  box-sizing: border-box;
+  padding: 0rem 0.6rem;
+  flex-grow: 1;
+  margin: 0.5rem 0 0.5rem 1rem;
+}
+
+.radio-input {
+  height: 1rem;
+  border-radius: 2rem;
+  border-style: solid;
+  box-sizing: border-box;
+  padding: 0rem 0.6rem;
+  flex-grow: 0.1;
+  margin: 0.5rem 0 0.5rem 1rem;
+}
+
+.form-input label {
+  margin-left: 0.5rem;
+}
+
+.box1 {
+  align-items: center;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  background-color: #295dac;
+  border-radius: 30px;
+  width: 80%;
+  box-shadow: -5px 5px 4px rgba(0, 0, 0, 0.3);
+  font-size: 25px;
+  justify-content: space-evenly;
+}
+
+.nodenum {
+  justify-content: center;
+  font-family: "Montserrat", sans-serif;
+  font-size: rem;
+  color: white;
+}
+
+.right {
+  font-family: "Montserrat", sans-serif;
+  width: 60%;
+  height: 7in;
+}
+
+.patinf {
+  font-weight: 500;
+  font-size: 20px;
+}
+
+.nameinput {
+  padding-top: 30px;
+}
+
+.surname {
+  padding: 0px 4px 0px 10px;
+  margin-top: 10px;
+  border-radius: 15px;
+  height: 25px;
+  width: 35%;
+  border-style: solid;
+  margin-right: 15px;
+}
+
+.firstname {
+  padding: 0px 4px 0px 10px;
+  margin-top: 10px;
+  border-radius: 15px;
+  height: 25px;
+  width: 35%;
+  border-style: solid;
+  margin-right: 15px;
+}
+
+.middle {
+  padding: 0px 4px 0px 10px;
+  margin-top: 10px;
+  border-radius: 15px;
+  height: 25px;
+  width: 19%;
+  border-style: solid;
+}
+
+.age {
+  margin-top: 20px;
+  margin-left: 10px;
+  margin-right: 40px;
+  border-radius: 15px;
+  height: 25px;
+  width: 12%;
+  border-style: solid;
+}
+
+.femalebtn {
+  margin-left: 30px;
+}
+
+.malebtn {
+  margin-left: 20px;
+}
+
+.gps-input {
+  display: flex;
+  flex-direction: column;
+}
+
+.gps-input div {
+  margin-bottom: 0.5rem;
+}
+
+.map {
+  height: 10vh;
+  width: 100%;
+  background-color: cornflowerblue;
+}
+
+.linkbtn {
+  color: white;
+  font-family: "Montserrat", sans-serif;
+  background-color: #080fff;
+  margin: 2rem 0rem;
+  padding: 1rem;
+  width: 10rem;
+  border-radius: 20px;
+  border: 0;
+  align-self: center;
+}
+
+.editor-form {
+  display: flex;
+  flex-direction: column;
+}

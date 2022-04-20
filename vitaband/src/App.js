@@ -9,7 +9,9 @@ import { useAuth } from "./shared/hooks/useAuth";
 import AuthContextProvider from "./shared/contexts/AuthContext";
 import LoadingContextProvider from "./shared/contexts/LoadingContext";
 import SnackbarContextProvider from "./shared/contexts/SnackbarContext";
-import {AnimatePresence} from "framer-motion";
+import { AnimatePresence } from "framer-motion";
+import NodeEditor from "./pages/nodeEditor/nodeEditor";
+import FeedBackElementWrapper from "./components/FeedBackElementWrapper";
 
 const theme = createTheme({
   palette: {
@@ -37,22 +39,28 @@ function App() {
               logout,
             }}
           >
-            {token && (
-              <AnimatePresence>
-              <Routes location={location} key={location.pathname}>
-                <Route exact path="/" element={<Homepage />} />
-                <Route path="/homepage" element={<Homepage />} />
-                <Route path="/linknode" element={<Linknode />} />
-                <Route path="/nodedetails/:nodeId" element={<Nodedetails />} />
-              </Routes>
-              </AnimatePresence>
-            )}
-            {!token && (
-              <Routes>
-                <Route exact path="/" element={<Login />} />
-                <Route exact path="/login" element={<Login />} />
-              </Routes>
-            )}
+            <FeedBackElementWrapper>
+              {token && (
+                <AnimatePresence>
+                  <Routes location={location} key={location.pathname}>
+                    <Route exact path="/" element={<Homepage />} />
+                    <Route path="/homepage" element={<Homepage />} />
+                    <Route path="/addnode" element={<NodeEditor />} />
+                    <Route path="/linknode" element={<NodeEditor />} />
+                    <Route
+                      path="/nodedetails/:nodeId"
+                      element={<Nodedetails />}
+                    />
+                  </Routes>
+                </AnimatePresence>
+              )}
+              {!token && (
+                <Routes>
+                  <Route exact path="/" element={<Login />} />
+                  <Route exact path="/login" element={<Login />} />
+                </Routes>
+              )}
+            </FeedBackElementWrapper>
           </AuthContextProvider>
         </SnackbarContextProvider>
       </LoadingContextProvider>

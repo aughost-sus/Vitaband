@@ -6,7 +6,6 @@ import { AuthContext } from "../../shared/contexts/AuthContext";
 import { Avatar, Box, Stack } from "@mui/material";
 import {
   AccountCircleRounded,
-  PersonPinCircleRounded,
 } from "@mui/icons-material";
 
 const Navbar = () => {

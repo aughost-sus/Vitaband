@@ -78,7 +78,9 @@ const getNodes = async (
   query
 ) => {
   loadingDispatch({ type: "SET_PARAMS", payload: { isOpen: true } });
-  let response = await requestAxios(`/nodes?page=${page}&&query=${query}&&target=nodeSerial`);
+  let response = await requestAxios(
+    `/nodes?page=${page}&&query=${query}&&target=nodeSerial`
+  );
   if (response.status === 200) {
     setNodes(response.data.data.nodes);
     setTotalNodes(response.data.data.totalItems);
@@ -96,13 +98,7 @@ const getNodes = async (
   loadingDispatch({ type: "SET_PARAMS", payload: { isOpen: false } });
 };
 
-const addNode = async (
-  node,
-  loadingDispatch,
-  snackbarDispatch,
-  handleClose,
-  appendNode
-) => {
+const addNode = async (node, loadingDispatch, snackbarDispatch, backToHome) => {
   loadingDispatch({ type: "SET_PARAMS", payload: { isOpen: true } });
   let response = await requestAxios(
     "/nodes",
@@ -111,7 +107,6 @@ const addNode = async (
   );
   if (response.status === 200) {
     console.log(response);
-    appendNode(response.data.data);
     snackbarDispatch({
       type: "SET_PARAMS",
       payload: {
@@ -120,6 +115,7 @@ const addNode = async (
         severity: "success",
       },
     });
+    backToHome();
   } else {
     snackbarDispatch({
       type: "SET_PARAMS",
@@ -130,7 +126,6 @@ const addNode = async (
       },
     });
   }
-  handleClose();
   loadingDispatch({ type: "SET_PARAMS", payload: { isOpen: false } });
 };
 
