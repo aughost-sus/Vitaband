@@ -1,5 +1,6 @@
-import { Box, Modal, Stack, Typography } from "@mui/material";
+import { Box, Button, Modal, Stack, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
+import MapContainer from "../../components/MapContainer";
 
 const style = {
   position: "absolute",
@@ -29,12 +30,13 @@ const MapModal = ({ open, handleClose, locationHandler, location }) => {
           <div
             style={{
               width: "100%",
-              height: "20vh",
+              height: "30vh",
               backgroundColor: "cornflowerblue",
             }}
           >
-            Insert Map Here
+            <MapContainer />
           </div>
+          <Button onClick={locationHandler}>Confirm Location</Button>
         </Stack>
       </Box>
     </Modal>

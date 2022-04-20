@@ -16,6 +16,7 @@ import {
   LinkRounded,
 } from "@mui/icons-material";
 import { DateTime } from "luxon";
+import MapContainer from "../../components/MapContainer";
 
 const Nodedetails = () => {
   const { snackbarDispatch } = useContext(SnackbarContext);
@@ -25,7 +26,7 @@ const Nodedetails = () => {
   const [vital, setVital] = useState("temperature");
   const [readings, setReadings] = useState([]);
   const { nodeId } = useParams();
-  const {state} = useLocation();
+  const { state } = useLocation();
 
   const formatData = () => {
     let labels = [];
@@ -169,13 +170,14 @@ const Nodedetails = () => {
             </Grid>
             <Grid item xs={12} md={6}>
               {node && node.patient && (
-                <div
-                  style={{
-                    width: "100%",
-                    height: "10vh",
-                    backgroundColor: "cornflowerblue",
-                  }}
-                ></div>
+                <MapContainer />
+                // <div
+                //   style={{
+                //     width: "100%",
+                //     height: "10vh",
+                //     backgroundColor: "cornflowerblue",
+                //   }}
+                // ></div>
               )}
             </Grid>
             <Grid item xs={12}>
