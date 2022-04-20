@@ -22,6 +22,10 @@ const NodeEditor = () => {
   useEffect(() => {
     if (state !== null) {
       setIsNew(state.isNew);
+      console.log(state);
+      if (!state.isNew) {
+        setNodeSerial(state.nodeSerial);
+      }
     }
   }, []);
 
@@ -65,6 +69,7 @@ const NodeEditor = () => {
         {
           nodeSerial,
           patient: checkPatient(e),
+          nodeId: state.nodeId,
         },
         loadingDispatch,
         snackbarDispatch,
@@ -108,6 +113,7 @@ const NodeEditor = () => {
                 placeholder="Node Serial"
                 style={{ flexGrow: "initial" }}
                 onChange={(e) => setNodeSerial(e.target.value)}
+                value={nodeSerial}
               />
             </div>
             <Box className="box1" sx={{ height: { sm: "20vh", md: "60vh" } }}>

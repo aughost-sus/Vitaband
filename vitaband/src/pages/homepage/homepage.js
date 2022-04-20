@@ -73,15 +73,6 @@ const Homepage = () => {
                 >
                   Add a Node
                 </Button>
-                <Button
-                  variant="text"
-                  onClick={() =>
-                    navigate("/linknode", { state: { isNew: false } })
-                  }
-                  startIcon={<LinkRounded />}
-                >
-                  Link a Node
-                </Button>
               </Stack>
               <input
                 type="text"
@@ -109,7 +100,11 @@ const Homepage = () => {
                         >
                           <div
                             className="node-card"
-                            onClick={() => navigate(`/nodedetails/${node._id}`)}
+                            onClick={() =>
+                              navigate(`/nodedetails/${node._id}`, {
+                                state: { nodeSerial: node.nodeSerial },
+                              })
+                            }
                           >
                             <div
                               className={

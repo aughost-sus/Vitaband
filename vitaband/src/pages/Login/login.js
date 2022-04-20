@@ -102,17 +102,6 @@ const Login = () => {
               />
               <input type="submit" className="form-button" value="LOGIN" />
             </Box>
-            <div className="createaccount">
-              <Link to="/nodedetails">
-                <button>Node Details</button>
-              </Link>
-              <Link to="/homepage">
-                <button>Homepage</button>
-              </Link>
-              <Link to="/linknode">
-                <button>LinkNode</button>
-              </Link>
-            </div>
           </Grid>
         </Grid>
       </Box>

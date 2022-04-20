@@ -129,23 +129,66 @@ const addNode = async (node, loadingDispatch, snackbarDispatch, backToHome) => {
   loadingDispatch({ type: "SET_PARAMS", payload: { isOpen: false } });
 };
 
-const getNode = async (nodeId, setNodeDetails) => {
+const getNode = async (
+  nodeId,
+  setNode,
+  setReadings,
+  loadingDispatch,
+  snackbarDispatch
+) => {
+  loadingDispatch({ type: "SET_PARAMS", payload: { isOpen: true } });
   let response = await requestAxios(`/nodes/${nodeId}`);
   if (response.status === 200) {
-    setNodeDetails(response.data.data);
+    setNode(response.data.data.node);
+    setReadings(response.data.data.readings);
     console.log(response.data.data);
   } else {
-    console.log("Failed to fetch data");
+    snackbarDispatch({
+      type: "SET_PARAMS",
+      payload: {
+        message: "Node Added",
+        isOpen: true,
+        severity: "success",
+      },
+    });
   }
+  loadingDispatch({ type: "SET_PARAMS", payload: { isOpen: false } });
 };
 
-const editNode = async (nodeSerial, patient, nodeId) => {
+const editNode = async (
+  node,
+  loadingDispatch,
+  snackbarDispatch,
+  backToHome
+) => {
+  loadingDispatch({ type: "SET_PARAMS", payload: { isOpen: true } });
   let response = await requestAxios(
-    `/nodes/${nodeId}`,
-    { nodeSerial, patient },
+    `/nodes/${node.nodeId}`,
+    { nodeSerial: node.nodeSerial, patient: node.patient },
     "PUT"
   );
-  return response;
+  if (response.status === 200) {
+    console.log(response);
+    snackbarDispatch({
+      type: "SET_PARAMS",
+      payload: {
+        message: "Node Edited",
+        isOpen: true,
+        severity: "success",
+      },
+    });
+    backToHome();
+  } else {
+    snackbarDispatch({
+      type: "SET_PARAMS",
+      payload: {
+        message: "Failed to edit node",
+        isOpen: true,
+        severity: "error",
+      },
+    });
+  }
+  loadingDispatch({ type: "SET_PARAMS", payload: { isOpen: false } });
 };
 
 const API = {
