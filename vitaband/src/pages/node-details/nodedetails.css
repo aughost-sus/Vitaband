@@ -34,13 +34,17 @@
   display: flex;
   justify-content: space-between;
   width: 100%;
-  background: pink;
+  background: linear-gradient(333deg, rgba(85,255,242,1) 0%, rgba(69,159,255,1) 55%, rgba(2,95,254,1) 100%);
   border-radius: 2rem;
   height: 6rem;
   padding: 1rem;
   box-sizing: border-box;
+  transition: all .2s ease-in-out;
 }
 
+.status-bar:hover {
+  transform: scale(1.03); 
+}
 .patient-details {
   box-sizing: border-box;
   display: flex;
@@ -184,6 +188,7 @@
   -webkit-box-shadow: -5px 5px 4px rgba(0, 0, 0, 0.3);
   -moz-box-shadow: -5px 5px 4px rgba(0, 0, 0, 0.3);
   cursor: pointer;
+  transition: all .2s ease-in-out;
 }
 
 .vital_box h3 {
@@ -198,4 +203,18 @@
   color: #575757;
   font-weight: lighter;
   font-size: 30px;
+}
+
+.vital_box:hover > span {
+  color: white;
+}
+
+.vital_box:hover > h3 {
+  color: white;
+}
+
+.vital_box:hover {
+  background: linear-gradient(333deg, rgba(85,255,242,1) 0%, rgba(69,159,255,1) 55%, rgba(2,95,254,1) 100%);
+  transform: scale(1.03); 
+  color: white;
 }
