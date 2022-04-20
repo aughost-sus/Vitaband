@@ -44,6 +44,19 @@
     cursor: pointer;
     overflow: hidden;
     font-family:'Montserrat', sans-serif;
+    transition: all .2s ease-in-out;
+}
+
+.node-card:hover {
+    transform: scale(1.03); 
+}
+
+.node-card:active {
+    transform: translateY(4px);
+}
+
+.node-card:hover > .card-header {
+    background: linear-gradient(333deg, rgba(99,174,252,1) 0%, rgba(69,159,255,1) 48%, rgba(2,95,254,1) 100%);
 }
 .node-card .card-header{
     color: white;
@@ -55,7 +68,20 @@
     background: linear-gradient(333deg, rgba(85,255,242,1) 0%, rgba(69,159,255,1) 77%, rgba(2,95,254,1) 100%);
     border-bottom-left-radius: 24px;
     border-top-left-radius: 24px;
+    transition: all .2s ease-in-out;
+}
 
+.node-card .card-header-active {
+    color: white;
+    flex-basis: 40%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: grey;
+    border-bottom-left-radius: 24px;
+    border-top-left-radius: 24px;
+    transition: all .2s ease-in-out;
 }
 
 .card-header span {

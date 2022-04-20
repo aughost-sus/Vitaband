@@ -8,6 +8,7 @@ import { useState } from "react";
 import API from "../../utils/API";
 import { useSocket } from "../../shared/hooks/useSocket";
 import { Link } from "react-router-dom";
+import {motion} from "framer-motion";
 
 const Nodedetails = ({ nodeId = "623a8a2d96e50a184bd22cc0" }) => {
   const [nodeDetails, setNodeDetails] = useState(null);
@@ -40,6 +41,10 @@ const Nodedetails = ({ nodeId = "623a8a2d96e50a184bd22cc0" }) => {
   useSocket("node", socketHandler);
 
   return (
+    <motion.div className="whole"
+    initial = {{opacity:0}}
+    animate = {{opacity: 1}}
+    exit = {{opacity:0}}>
     <div className="hahaha">
       <Navbar />
       {/* start coding here */}
@@ -105,6 +110,7 @@ const Nodedetails = ({ nodeId = "623a8a2d96e50a184bd22cc0" }) => {
         </div>
       </div>
     </div>
+    </motion.div>
   );
 };
 

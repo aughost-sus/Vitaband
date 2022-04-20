@@ -21,6 +21,9 @@ import { GrSearch } from "react-icons/gr";
 import { SnackbarContext } from "../../shared/contexts/SnackbarContext";
 import { LoadingContext } from "../../shared/contexts/LoadingContext";
 import AddNodeModal from "./AddNodeModal";
+import {motion} from "framer-motion";
+import {Suspense} from 'react';
+import Loader from '../../components/loader'
 
 const Homepage = () => {
   const [nodes, setNodes] = useState([]);
@@ -71,8 +74,22 @@ const Homepage = () => {
     );
   };
 
+  var x = 0;
+
+  if (x<=0) {
+    x+=1;
+  } else {
+    document.getElementById("card-header").className += " card-header-active";
+  }
+
+
   return (
-    <Box>
+    <motion.div className="whole"
+    initial = {{opacity:0}}
+    animate = {{opacity: 1}}
+    exit = {{opacity:0}}>
+    <Box
+    >
       {loadingParams.isOpen && <LinearProgress />}
       <Navbar />
       <Container>
@@ -106,16 +123,27 @@ const Homepage = () => {
               onChange={searchHandler}
             />
           </Grid>
+          <motion.div
+          initial = {{opacity:0,
+          x: '100px'
+          }}
+          animate = {{opacity: 1,
+            x: '0px',
+            duration: 2
+           }}
+          exit = {{opacity:0}}>
+          <Suspense fallback={<Loader />}>
           <Grid item xs={12}>
             <Grid container spacing={2}>
               {nodes.length !== 0 &&
                 nodes.map((node) => (
+                 
                   <Grid item xs={12} sm={6} md={4} lg={3} key={node.nodeSerial}>
                     <div
                       className="node-card"
                       onClick={() => navigate(`/nodedetails/${node._id}`)}
                     >
-                      <div className="card-header">
+                      <div className={ node.patient ? 'card-header' : 'card-header-active'}>
                         <div>NODE</div>
                         <h1 className="node_id">{node.nodeSerial}</h1>
                       </div>
@@ -151,6 +179,8 @@ const Homepage = () => {
                 ))}
             </Grid>
           </Grid>
+          </Suspense>
+          </motion.div>
         </Grid>
       </Container>
       <AddNodeModal
@@ -176,6 +206,7 @@ const Homepage = () => {
         </Alert>
       </Snackbar>
     </Box>
+    </motion.div>
   );
 };
 

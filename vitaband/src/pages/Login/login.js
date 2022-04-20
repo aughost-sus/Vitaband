@@ -7,6 +7,7 @@ import logo from "../../images/Logo_whole.png";
 import { Alert, Box, Grid, LinearProgress, Snackbar } from "@mui/material";
 import { LoadingContext } from "../../shared/contexts/LoadingContext";
 import { SnackbarContext } from "../../shared/contexts/SnackbarContext";
+import {motion} from "framer-motion";
 
 const Login = () => {
   const auth = useContext(AuthContext);
@@ -35,6 +36,16 @@ const Login = () => {
   };
 
   return (
+    <motion.div
+    initial = {{opacity:0,
+      x: '500px'
+      }}
+      animate = {{opacity: 1,
+        x: '0px',
+        duration: 5
+       }}
+      exit = {{opacity:0}}
+    >
     <Box
       sx={{
         backgroundImage: "url(./LOGIN.png)",
@@ -85,7 +96,8 @@ const Login = () => {
             component="form"
             onSubmit={loginHandler}
             className="loginform"
-            sx={{ padding: { sm: "0rem", md: "6rem" } }}
+            sx={{ padding: { sm: "0rem", md: "6rem" },
+          }}
           >
             <input
               type="text"
@@ -130,6 +142,7 @@ const Login = () => {
         </Alert>
       </Snackbar>
     </Box>
+    </motion.div>
   );
 };
 

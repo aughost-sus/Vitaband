@@ -38,12 +38,16 @@ body {
   text-align: left;
 }
 
-.leftpart h1 {
-  margin-top: -30px;
-  letter-spacing: 0.2em;
-  font-size: 6em;
-  color: #010B47;
+ h1 {
+   margin-top: -20px;
+  color: black;
+  font-family:'Montserrat', sans-serif;
 }
+
+span {
+  font-family:'Montserrat', sans-serif;
+}
+
 .leftpart h2 {
   margin-top: -80px;
   letter-spacing: 0.2em;
@@ -74,6 +78,8 @@ body {
   border-style: solid;
   box-sizing: border-box;
   padding: 0rem 0.6rem;
+  display: flex;
+  justify-content: center;
 }
 
 .form-button {
@@ -86,8 +92,19 @@ body {
   font-family: 'Open Sans', sans-serif;
   color: #fff;
   margin-bottom: 1rem;
+  transition: all .2s ease-in-out;
 }
 
+.form-button:hover {
+  background: #070dc2;
+  transform: scale(1.03); 
+}
+
+.form-button:active {
+  background-color: #080FFF;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
 .createaccount {
   position:relative;
   display: flex;
