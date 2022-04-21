@@ -11,7 +11,10 @@ import MapModal from "./MapModal";
 
 const NodeEditor = () => {
   const [open, setOpen] = useState(false);
-  const [location, setLocation] = useState(false);
+  const [location, setLocation] = useState({
+    lat: 14.830121812143584,
+    lng: 120.80162571435547,
+  });
   const [nodeSerial, setNodeSerial] = useState("");
   const [isNew, setIsNew] = useState(true);
   const { snackbarDispatch } = useContext(SnackbarContext);
@@ -26,6 +29,12 @@ const NodeEditor = () => {
       if (!state.isNew) {
         setNodeSerial(state.nodeSerial);
       }
+    }
+    if (state && state.patient && state.patient.latitude && state.patient.longitude) {
+      setLocation({
+        lat: state.patient.latitude,
+        lng: state.patient.longitude,
+      });
     }
   }, []);
 
@@ -86,8 +95,9 @@ const NodeEditor = () => {
     setOpen(false);
   };
 
-  const locationHandler = () => {
-    setLocation({ lat: 14, lng: 120 });
+  const locationHandler = (coor) => {
+    setLocation(coor);
+    handleClose();
   };
 
   return (
@@ -141,11 +151,15 @@ const NodeEditor = () => {
                     className="node-form-field"
                     placeholder=" Surname"
                     name="lastname"
+                    value={state && state.patient ? state.patient.lastname : ""}
                   />
                   <input
                     className="node-form-field"
                     placeholder=" First Name"
                     name="firstname"
+                    value={
+                      state && state.patient ? state.patient.firstname : ""
+                    }
                   />
                 </div>
               </div>
@@ -163,6 +177,7 @@ const NodeEditor = () => {
                     className="node-form-field"
                     placeholder="Age"
                     name="age"
+                    value={state && state.patient ? state.patient.age : ""}
                   />
                 </div>
                 <div className="form-input">
@@ -191,6 +206,7 @@ const NodeEditor = () => {
                   className="node-form-field"
                   placeholder="Complete Address"
                   name="address"
+                  value={state && state.patient ? state.patient.address : ""}
                 />
               </div>
               <div className="form-input">
@@ -200,6 +216,7 @@ const NodeEditor = () => {
                   className="node-form-field"
                   placeholder="Contact No"
                   name="contactNo"
+                  value={state && state.patient ? state.patient.contactNo : ""}
                 />
               </div>
               <div className="form-input">
@@ -217,6 +234,7 @@ const NodeEditor = () => {
         open={open}
         handleClose={handleClose}
         locationHandler={locationHandler}
+        location={location}
       />
     </Box>
   );

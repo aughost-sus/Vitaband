@@ -1,6 +1,7 @@
 const LS_USER_DATA = "userData";
 const TOKEN_EXPIRATION = new Date(new Date().getTime() + 1000 * 60 * 60);
 const API_URL = "https://vitaband.herokuapp.com";
+const MAP_API = "AIzaSyBCIJfldUcipchlxKIfyinkd1JAbpVf60I";
 // const API_URL = "http://localhost:8000";
 const MAP_SETTINGS = {
   DEFAULT_MAP_OPTIONS: {
@@ -21,4 +22,4 @@ const MAP_SETTINGS = {
   DIRECTIONS_OPTIONS: { suppressMarkers: true, preserveViewport: true },
 };
 
-export { LS_USER_DATA, TOKEN_EXPIRATION, API_URL, MAP_SETTINGS };
+export { LS_USER_DATA, TOKEN_EXPIRATION, API_URL, MAP_SETTINGS, MAP_API };

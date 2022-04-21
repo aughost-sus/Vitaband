@@ -3,7 +3,6 @@ import { blue, indigo } from "@mui/material/colors";
 import { Route, Routes, useLocation } from "react-router-dom";
 import Login from "./pages/Login/login";
 import Homepage from "./pages/homepage/homepage";
-import Linknode from "./pages/linkanode/linknode";
 import Nodedetails from "./pages/node-details/nodedetails";
 import { useAuth } from "./shared/hooks/useAuth";
 import AuthContextProvider from "./shared/contexts/AuthContext";
@@ -46,6 +45,7 @@ function App() {
                     <Route exact path="/" element={<Homepage />} />
                     <Route path="/homepage" element={<Homepage />} />
                     <Route path="/addnode" element={<NodeEditor />} />
+                    <Route path="/editnode" element={<NodeEditor />} />
                     <Route path="/linknode" element={<NodeEditor />} />
                     <Route
                       path="/nodedetails/:nodeId"

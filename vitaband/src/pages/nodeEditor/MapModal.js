@@ -1,6 +1,6 @@
 import { Box, Button, Modal, Stack, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import MapContainer from "../../components/MapContainer";
+import AppMap from "../../components/AppMap";
 
 const style = {
   position: "absolute",
@@ -15,6 +15,20 @@ const style = {
 };
 
 const MapModal = ({ open, handleClose, locationHandler, location }) => {
+  const [localLocation, setLocalLocation] = useState({
+    lat: 14.830121812143584,
+    lng: 120.80162571435547,
+  });
+
+  const localLocationHandler = (ev) => {
+    console.log({ lat: ev.latLng.lat(), lng: ev.latLng.lng() });
+    setLocalLocation({ lat: ev.latLng.lat(), lng: ev.latLng.lng() });
+  };
+
+  useEffect(() => {
+    setLocalLocation(location);
+  }, [location, open]);
+
   return (
     <Modal
       open={open}
@@ -34,9 +48,16 @@ const MapModal = ({ open, handleClose, locationHandler, location }) => {
               backgroundColor: "cornflowerblue",
             }}
           >
-            <MapContainer />
+            <AppMap
+              isPicker={true}
+              target={localLocation}
+              isMarkerShown={true}
+              onMapClick={localLocationHandler}
+            />
           </div>
-          <Button onClick={locationHandler}>Confirm Location</Button>
+          <Button onClick={() => locationHandler(localLocation)}>
+            Confirm Location
+          </Button>
         </Stack>
       </Box>
     </Modal>

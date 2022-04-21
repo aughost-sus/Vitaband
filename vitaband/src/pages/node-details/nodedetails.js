@@ -13,10 +13,11 @@ import { Box, Button, Container, Grid, Stack } from "@mui/material";
 import {
   ChevronLeftRounded,
   DeleteForeverRounded,
+  EditRounded,
   LinkRounded,
 } from "@mui/icons-material";
 import { DateTime } from "luxon";
-import MapContainer from "../../components/MapContainer";
+import AppMap from "../../components/AppMap";
 
 const Nodedetails = () => {
   const { snackbarDispatch } = useContext(SnackbarContext);
@@ -47,6 +48,24 @@ const Nodedetails = () => {
         },
       ],
     };
+  };
+
+  const isActive = () => {
+    if (readings.length !== 0) {
+      if (Math.abs(new Date() - new Date(readings.at(-1).datetime)) < 10000) {
+        return true;
+      }
+    }
+    return false;
+  };
+
+  const isWear = () => {
+    if (readings.length !== 0) {
+      if (readings.at(-1).ir > 30000) {
+        return true;
+      }
+    }
+    return false;
   };
 
   useEffect(() => {
@@ -101,12 +120,29 @@ const Nodedetails = () => {
               Back to Home
             </Button>
             {node && node.patient && (
-              <Button
-                onClick={unlinkHandler}
-                startIcon={<DeleteForeverRounded />}
-              >
-                Remove Patient
-              </Button>
+              <>
+                <Button
+                  startIcon={<EditRounded />}
+                  onClick={() =>
+                    navigate(`/editnode`, {
+                      state: {
+                        isNew: false,
+                        nodeSerial: node.nodeSerial,
+                        nodeId,
+                        patient: node.patient,
+                      },
+                    })
+                  }
+                >
+                  Edit Node
+                </Button>
+                <Button
+                  onClick={unlinkHandler}
+                  startIcon={<DeleteForeverRounded />}
+                >
+                  Remove Patient
+                </Button>
+              </>
             )}
             {node && !node.patient && (
               <Button
@@ -117,6 +153,7 @@ const Nodedetails = () => {
                       isNew: false,
                       nodeSerial: node.nodeSerial,
                       nodeId,
+                      patient: null,
                     },
                   })
                 }
@@ -129,8 +166,12 @@ const Nodedetails = () => {
             <Grid item xs={12}>
               <div className="status-bar">
                 <div className="status">
-                  <div className="indicator" style={{ background: "red" }} />
-                  <span>ACTIVE</span>
+                  <div
+                    className="indicator"
+                    style={{ background: isActive() ? "Chartreuse" : "red" }}
+                  />
+                  <span>{isActive() ? "ACTIVE " : "OFFLINE "}</span>
+                  <span>{isWear() ? "" : " - NOT WORN"}</span>
                 </div>
                 <div className="nodename">
                   <p>NODE</p>
@@ -169,15 +210,28 @@ const Nodedetails = () => {
               )}
             </Grid>
             <Grid item xs={12} md={6}>
-              {node && node.patient && (
-                <MapContainer />
-                // <div
-                //   style={{
-                //     width: "100%",
-                //     height: "10vh",
-                //     backgroundColor: "cornflowerblue",
-                //   }}
-                // ></div>
+              {node && node.patient && readings.length !== 0 && (
+                <AppMap
+                  isPicker={false}
+                  isMarkerShown={true}
+                  target={{
+                    lat: readings.at(-1).lat,
+                    lng: readings.at(-1).lng,
+                  }}
+                  nodeCoordinates={{
+                    lat: readings.at(-1).lat,
+                    lng: readings.at(-1).lng,
+                  }}
+                  addressCoordinates={
+                    node.patient.longitude && node.patient.latitude
+                      ? {
+                          lat: node.patient.latitude,
+                          lng: node.patient.longitude,
+                        }
+                      : null
+                  }
+                  onMapClick={(ev) => {}}
+                />
               )}
             </Grid>
             <Grid item xs={12}>
