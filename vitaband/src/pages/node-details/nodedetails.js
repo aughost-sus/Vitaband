@@ -28,6 +28,7 @@ const Nodedetails = () => {
   const [readings, setReadings] = useState([]);
   const { nodeId } = useParams();
   const { state } = useLocation();
+  const [trigger, setTrigger] = useState(false);
 
   const formatData = () => {
     let labels = [];
@@ -52,7 +53,7 @@ const Nodedetails = () => {
 
   const isActive = () => {
     if (readings.length !== 0) {
-      if (Math.abs(new Date() - new Date(readings.at(-1).datetime)) < 10000) {
+      if (Math.abs(new Date() - new Date(readings.at(-1).datetime)) < 6000) {
         return true;
       }
     }
@@ -77,6 +78,15 @@ const Nodedetails = () => {
       snackbarDispatch
     );
   }, []);
+
+  useEffect(() => {
+    let timeout = setTimeout(() => {
+      setTrigger(!trigger);
+    }, 8 * 1000);
+    return () => {
+      clearTimeout(timeout);
+    };
+  }, [readings]);
 
   const socketHandler = (data) => {
     setReadings((readings) => {

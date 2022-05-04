@@ -24,7 +24,7 @@ const AppMap = compose(
   >
     {props.isMarkerShown && !props.isPicker && (
       <>
-        <Marker position={props.nodeCoordinates} />
+        <Marker position={props.nodeCoordinates}/>
         <Marker
           position={
             props.addressCoordinates

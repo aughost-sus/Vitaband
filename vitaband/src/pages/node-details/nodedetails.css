@@ -45,6 +45,7 @@
 .status-bar:hover {
   transform: scale(1.03); 
 }
+
 .patient-details {
   box-sizing: border-box;
   display: flex;
