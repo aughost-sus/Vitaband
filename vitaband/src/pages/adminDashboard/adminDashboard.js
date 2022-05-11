@@ -12,6 +12,7 @@ import {
   LinearProgress,
   IconButton,
   Button,
+  ListItemSecondaryAction,
 } from "@mui/material";
 import { motion } from "framer-motion";
 import Navbar from "../Navbar/navbar";
@@ -84,7 +85,7 @@ const AdminDashboard = () => {
                             <IconButton
                               edge="end"
                               aria-label="delete"
-                              onClick={userDeleteHandler}
+                              onClick={() => userDeleteHandler(user._id)}
                             >
                               <DeleteRounded />
                             </IconButton>
@@ -141,15 +142,6 @@ const AdminDashboard = () => {
                             handleNodeOpen();
                           }}
                           key={node._id}
-                          secondaryAction={
-                            <IconButton
-                              edge="end"
-                              aria-label="delete"
-                              onClick={() => deleteNodeHandler(node._id)}
-                            >
-                              <DeleteRounded />
-                            </IconButton>
-                          }
                         >
                           <ListItemText
                             id={node._id}
@@ -160,6 +152,15 @@ const AdminDashboard = () => {
                                 : "No Patient Associated"
                             }
                           />
+                          <ListItemSecondaryAction>
+                            <IconButton
+                              edge="end"
+                              aria-label="delete"
+                              onClick={() => deleteNodeHandler(node._id)}
+                            >
+                              <DeleteRounded />
+                            </IconButton>
+                          </ListItemSecondaryAction>
                         </ListItem>
                       ))}
                     </List>
@@ -201,15 +202,6 @@ const AdminDashboard = () => {
                             handleGatewayOpen();
                           }}
                           key={gateway._id}
-                          secondaryAction={
-                            <IconButton
-                              edge="end"
-                              aria-label="delete"
-                              onClick={() => deleteGatewayHandler(gateway._id)}
-                            >
-                              <DeleteRounded />
-                            </IconButton>
-                          }
                         >
                           <ListItemText
                             id={gateway._id}
@@ -221,14 +213,23 @@ const AdminDashboard = () => {
                                 : "Persistence Mode"
                             }
                           />
-                          <Switch
-                            edge="end"
-                            onChange={() => gatewayToggleHandler(gateway)}
-                            checked={
-                              gateway.endpoint !==
-                              "https://vitaband.herokuapp.com/test/postRead"
-                            }
-                          />
+                          <ListItemSecondaryAction>
+                            <Switch
+                              edge="end"
+                              onChange={() => gatewayToggleHandler(gateway)}
+                              checked={
+                                gateway.endpoint !==
+                                "https://vitaband.herokuapp.com/test/postRead"
+                              }
+                            />
+                            <IconButton
+                              edge="end"
+                              aria-label="delete"
+                              onClick={() => deleteGatewayHandler(gateway._id)}
+                            >
+                              <DeleteRounded />
+                            </IconButton>
+                          </ListItemSecondaryAction>
                         </ListItem>
                       ))}
                     </List>

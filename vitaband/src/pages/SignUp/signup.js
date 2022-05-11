@@ -2,17 +2,19 @@ import React, { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../shared/contexts/AuthContext";
 import API from "../../utils/API";
-import "./login.css";
+import "./signup.css";
 import logo from "../../images/Logo_whole.png";
 import { Box, Grid } from "@mui/material";
 import { LoadingContext } from "../../shared/contexts/LoadingContext";
 import { SnackbarContext } from "../../shared/contexts/SnackbarContext";
 import { motion } from "framer-motion";
 
-const Login = () => {
+const Signup = () => {
   const auth = useContext(AuthContext);
   const { snackbarDispatch } = useContext(SnackbarContext);
   const { loadingDispatch } = useContext(LoadingContext);
+  const [firstname, setFirstname] = useState();
+  const [lastname, setLastname] = useState();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const navigate = useNavigate();
@@ -21,18 +23,34 @@ const Login = () => {
     loadingDispatch({ type: "SET_PARAMS", payload: { isOpen: true } });
     e.preventDefault();
     console.log(email, password);
-    await API.login(email, password, auth.login, (message) => {
-      snackbarDispatch({
-        type: "SET_PARAMS",
-        payload: {
-          message,
-          isOpen: true,
-          severity: "error",
-        },
-      });
-    });
+    await API.signup(
+      firstname,
+      lastname,
+      email,
+      password,
+      () => {
+        snackbarDispatch({
+          type: "SET_PARAMS",
+          payload: {
+            message: "Account Created. Contact Admin to verify your account.",
+            isOpen: true,
+            severity: "success",
+          },
+        });
+        navigate("/");
+      },
+      (message) => {
+        snackbarDispatch({
+          type: "SET_PARAMS",
+          payload: {
+            message,
+            isOpen: true,
+            severity: "error",
+          },
+        });
+      }
+    );
     loadingDispatch({ type: "SET_PARAMS", payload: { isOpen: false } });
-    // navigate("/");
   };
 
   return (
@@ -86,7 +104,7 @@ const Login = () => {
             }}
           >
             <Box
-              component={"form"}
+              component="form"
               onSubmit={loginHandler}
               className="loginform"
               sx={{ padding: { sm: "0rem", md: "6rem" } }}
@@ -95,16 +113,39 @@ const Login = () => {
               <input
                 type="text"
                 className="form-field"
+                onChange={(e) => setFirstname(e.target.value)}
+                placeholder="First Name"
+                autoComplete="false"
+              />
+              <input
+                type="text"
+                className="form-field"
+                onChange={(e) => setLastname(e.target.value)}
+                placeholder="Last Name"
+                autoComplete="false"
+              />
+              <input
+                type="email"
+                className="form-field"
                 onChange={(e) => setEmail(e.target.value)}
+                placeholder="Email"
+                autoComplete="false"
               />
               <input
                 type="password"
                 className="form-field"
                 onChange={(e) => setPassword(e.target.value)}
+                placeholder="Password"
+                autoComplete="false"
               />
-              <input type="submit" className="form-button" value="LOGIN" />
-              <hr style={{marginBottom: '1.4rem'}}/>
-              <input type="button" className="form-button" value="Create an Account" onClick={() => navigate('/signup')}/>
+              <input type="submit" className="form-button" value="SIGNUP" />
+              <hr style={{ marginBottom: "1.4rem" }} />
+              <input
+                type="button"
+                className="form-button"
+                value="Already have Account?"
+                onClick={() => navigate("/login")}
+              />
             </Box>
           </Grid>
         </Grid>
@@ -113,4 +154,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Signup;

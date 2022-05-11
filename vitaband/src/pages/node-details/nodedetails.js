@@ -281,7 +281,9 @@ const Nodedetails = () => {
                 <Grid item xs={6} md={3}>
                   <div className="vital_box" onClick={() => setVital("cough")}>
                     <h3>COUGH FREQUENCY:</h3>
-                    <span>{readings.at(-1).cough ? 1 : 0}</span>
+                    <span>{`${readings
+                      .map((item) => item.cough)
+                      .reduce((a, b) => a + b)} coughs / min`}</span>
                   </div>
                 </Grid>
               </>

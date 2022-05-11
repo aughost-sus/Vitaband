@@ -103,7 +103,8 @@ export const useAdmin = () => {
     }
   };
 
-  const userDeleteHandler = async () => {};
+  const userDeleteHandler = async (userId) => {
+    API.deleteUser(users, setUsers, userId, loadingDispatch, snackbarDispatch);};
 
   const addNodeHandler = async (node) => {
     const response = await API.addNode(

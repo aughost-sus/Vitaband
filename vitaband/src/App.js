@@ -12,6 +12,7 @@ import { AnimatePresence } from "framer-motion";
 import NodeEditor from "./pages/nodeEditor/nodeEditor";
 import FeedBackElementWrapper from "./components/FeedBackElementWrapper";
 import AdminDashboard from "./pages/adminDashboard/adminDashboard";
+import Signup from "./pages/SignUp/signup";
 
 const theme = createTheme({
   palette: {
@@ -67,6 +68,7 @@ function App() {
                 <Routes>
                   <Route exact path="/" element={<Login />} />
                   <Route exact path="/login" element={<Login />} />
+                  <Route exact path="/signup" element={<Signup />} />
                 </Routes>
               )}
             </FeedBackElementWrapper>

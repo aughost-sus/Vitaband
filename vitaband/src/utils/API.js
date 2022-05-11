@@ -60,12 +60,24 @@ const login = async (email, password, callback, errorCallback) => {
   return response;
 };
 
-const signup = async (firstname, lastname, email, password) => {
+const signup = async (
+  firstname,
+  lastname,
+  email,
+  password,
+  callback,
+  errorCallback
+) => {
   let response = await requestAxios(
     "/auth/user/signup",
     { firstname, lastname, email, password },
     "POST"
   );
+  if (response.status === 200) {
+    callback();
+  } else {
+    errorCallback("Failed to Sign Up");
+  }
   return response;
 };
 
@@ -298,7 +310,7 @@ const editGateway = async (
     snackbarDispatch({
       type: "SET_PARAMS",
       payload: {
-        message: "Node Edited",
+        message: "Gateway Edited",
         isOpen: true,
         severity: "success",
       },
@@ -417,9 +429,17 @@ const deleteUser = async (
   snackbarDispatch
 ) => {
   loadingDispatch({ type: "SET_PARAMS", payload: { isOpen: true } }, "DELETE");
-  let response = await requestAxios(`/users/${userId}`, "DELETE");
+  let response = await requestAxios(`/users/${userId}`, {}, "DELETE");
   if (response.status === 200) {
-    setUsers(users.filter((node) => node._id !== userId));
+    setUsers(users.filter((user) => user._id !== userId));
+    snackbarDispatch({
+      type: "SET_PARAMS",
+      payload: {
+        message: "User Deleted",
+        isOpen: true,
+        severity: "success",
+      },
+    });
   } else {
     snackbarDispatch({
       type: "SET_PARAMS",
