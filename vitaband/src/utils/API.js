@@ -1,4 +1,3 @@
-import { responsiveFontSizes } from "@mui/material";
 import axios from "axios";
 import { API_URL, LS_USER_DATA } from "./constants";
 
@@ -52,7 +51,8 @@ const login = async (email, password, callback, errorCallback) => {
       response.data.data.userId,
       response.data.data.token,
       response.data.data.firstname,
-      response.data.data.lastname
+      response.data.data.lastname,
+      response.data.data.accountType
     );
   } else {
     errorCallback(response.data.message || "Failed to login");
@@ -106,7 +106,6 @@ const addNode = async (node, loadingDispatch, snackbarDispatch, backToHome) => {
     "POST"
   );
   if (response.status === 200) {
-    console.log(response);
     snackbarDispatch({
       type: "SET_PARAMS",
       payload: {
@@ -127,6 +126,7 @@ const addNode = async (node, loadingDispatch, snackbarDispatch, backToHome) => {
     });
   }
   loadingDispatch({ type: "SET_PARAMS", payload: { isOpen: false } });
+  return response;
 };
 
 const getNode = async (
@@ -163,7 +163,7 @@ const editNode = async (
 ) => {
   loadingDispatch({ type: "SET_PARAMS", payload: { isOpen: true } });
   let response = await requestAxios(
-    `/nodes/${node.nodeId}`,
+    `/nodes/${node._id}`,
     { nodeSerial: node.nodeSerial, patient: node.patient },
     "PUT"
   );
@@ -189,6 +189,248 @@ const editNode = async (
     });
   }
   loadingDispatch({ type: "SET_PARAMS", payload: { isOpen: false } });
+  return response;
+};
+
+const deleteNode = async (
+  nodes,
+  setNodes,
+  nodeId,
+  loadingDispatch,
+  snackbarDispatch
+) => {
+  loadingDispatch({ type: "SET_PARAMS", payload: { isOpen: true } }, "DELETE");
+  let response = await requestAxios(`/nodes/${nodeId}`, {}, "DELETE");
+  console.log(response);
+  if (response.status === 200) {
+    setNodes(nodes.filter((node) => node._id !== nodeId));
+    snackbarDispatch({
+      type: "SET_PARAMS",
+      payload: {
+        message: "Node Deleted",
+        isOpen: true,
+        severity: "success",
+      },
+    });
+  } else {
+    snackbarDispatch({
+      type: "SET_PARAMS",
+      payload: {
+        message: "Failed to Delete Node",
+        isOpen: true,
+        severity: "error",
+      },
+    });
+  }
+  loadingDispatch({ type: "SET_PARAMS", payload: { isOpen: false } });
+};
+
+const getGateways = async (
+  setGateways,
+  setTotalGateways,
+  page,
+  loadingDispatch,
+  snackbarDispatch,
+  query
+) => {
+  loadingDispatch({ type: "SET_PARAMS", payload: { isOpen: true } });
+  let response = await requestAxios(
+    `/gateways?page=${page}&&query=${query}&&target=gatewaySerial`
+  );
+  if (response.status === 200) {
+    setGateways(response.data.gateways);
+    setTotalGateways(response.data.totalItems);
+  } else {
+    snackbarDispatch({
+      type: "SET_PARAMS",
+      payload: {
+        message: "Failed to load Gateways",
+        isOpen: true,
+        severity: "error",
+      },
+    });
+  }
+  loadingDispatch({ type: "SET_PARAMS", payload: { isOpen: false } });
+};
+
+const addGateway = async (
+  gateway,
+  loadingDispatch,
+  snackbarDispatch,
+  callback
+) => {
+  loadingDispatch({ type: "SET_PARAMS", payload: { isOpen: true } });
+  let response = await requestAxios("/gateways", gateway, "POST");
+  if (response.status === 200) {
+    callback();
+    snackbarDispatch({
+      type: "SET_PARAMS",
+      payload: {
+        message: "Gateway Added",
+        isOpen: true,
+        severity: "success",
+      },
+    });
+  } else {
+    snackbarDispatch({
+      type: "SET_PARAMS",
+      payload: {
+        message: "Failed to add gateway",
+        isOpen: true,
+        severity: "error",
+      },
+    });
+  }
+  loadingDispatch({ type: "SET_PARAMS", payload: { isOpen: false } });
+  return response;
+};
+
+const editGateway = async (
+  gateway,
+  loadingDispatch,
+  snackbarDispatch,
+  backToHome
+) => {
+  loadingDispatch({ type: "SET_PARAMS", payload: { isOpen: true } });
+  let response = await requestAxios(`/gateways/${gateway._id}`, gateway, "PUT");
+  if (response.status === 200) {
+    console.log(response);
+    snackbarDispatch({
+      type: "SET_PARAMS",
+      payload: {
+        message: "Node Edited",
+        isOpen: true,
+        severity: "success",
+      },
+    });
+    backToHome();
+  } else {
+    snackbarDispatch({
+      type: "SET_PARAMS",
+      payload: {
+        message: "Failed to edit node",
+        isOpen: true,
+        severity: "error",
+      },
+    });
+  }
+  loadingDispatch({ type: "SET_PARAMS", payload: { isOpen: false } });
+  return response;
+};
+
+const deleteGateway = async (
+  gateways,
+  setGateways,
+  gatewayId,
+  loadingDispatch,
+  snackbarDispatch
+) => {
+  loadingDispatch({ type: "SET_PARAMS", payload: { isOpen: true } }, "DELETE");
+  let response = await requestAxios(`/gateways/${gatewayId}`, {}, "DELETE");
+  if (response.status === 200) {
+    setGateways(gateways.filter((gateway) => gateway._id !== gatewayId));
+    snackbarDispatch({
+      type: "SET_PARAMS",
+      payload: {
+        message: "Gateway Deleted",
+        isOpen: true,
+        severity: "success",
+      },
+    });
+  } else {
+    snackbarDispatch({
+      type: "SET_PARAMS",
+      payload: {
+        message: "Failed to Delete Gateway",
+        isOpen: true,
+        severity: "error",
+      },
+    });
+  }
+  loadingDispatch({ type: "SET_PARAMS", payload: { isOpen: false } });
+};
+
+const getUsers = async (
+  setUsers,
+  setTotalUsers,
+  page,
+  loadingDispatch,
+  snackbarDispatch,
+  query
+) => {
+  loadingDispatch({ type: "SET_PARAMS", payload: { isOpen: true } });
+  let response = await requestAxios(
+    `/users?page=${page}&&query=${query}&&target=email`
+  );
+  if (response.status === 200) {
+    setUsers(response.data.users);
+    setTotalUsers(response.data.totalItems);
+  } else {
+    snackbarDispatch({
+      type: "SET_PARAMS",
+      payload: {
+        message: "Failed to load Users",
+        isOpen: true,
+        severity: "error",
+      },
+    });
+  }
+  loadingDispatch({ type: "SET_PARAMS", payload: { isOpen: false } });
+};
+
+const editUser = async (
+  user,
+  loadingDispatch,
+  snackbarDispatch,
+  updateUsers
+) => {
+  loadingDispatch({ type: "SET_PARAMS", payload: { isOpen: true } });
+  let response = await requestAxios(`/users/${user._id}`, user, "PUT");
+  if (response.status === 200) {
+    updateUsers();
+    snackbarDispatch({
+      type: "SET_PARAMS",
+      payload: {
+        message: "Account Status Updated",
+        isOpen: true,
+        severity: "success",
+      },
+    });
+  } else {
+    snackbarDispatch({
+      type: "SET_PARAMS",
+      payload: {
+        message: "Failed to update user status",
+        isOpen: true,
+        severity: "error",
+      },
+    });
+  }
+  loadingDispatch({ type: "SET_PARAMS", payload: { isOpen: false } });
+};
+
+const deleteUser = async (
+  users,
+  setUsers,
+  userId,
+  loadingDispatch,
+  snackbarDispatch
+) => {
+  loadingDispatch({ type: "SET_PARAMS", payload: { isOpen: true } }, "DELETE");
+  let response = await requestAxios(`/users/${userId}`, "DELETE");
+  if (response.status === 200) {
+    setUsers(users.filter((node) => node._id !== userId));
+  } else {
+    snackbarDispatch({
+      type: "SET_PARAMS",
+      payload: {
+        message: "Failed to Delete User",
+        isOpen: true,
+        severity: "error",
+      },
+    });
+  }
+  loadingDispatch({ type: "SET_PARAMS", payload: { isOpen: false } });
 };
 
 const API = {
@@ -198,6 +440,14 @@ const API = {
   addNode,
   getNode,
   editNode,
+  deleteNode,
+  getUsers,
+  editUser,
+  deleteUser,
+  getGateways,
+  addGateway,
+  editGateway,
+  deleteGateway,
 };
 
 export default API;

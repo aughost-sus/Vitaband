@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { LS_USER_DATA, TOKEN_EXPIRATION } from "../../utils/constants";
+import { LS_USER_DATA } from "../../utils/constants";
 
 let logoutTimer;
 
@@ -10,11 +10,12 @@ export const useAuth = () => {
   const [userId, setUserId] = useState(null);
   const [firstname, setFirstname] = useState(null);
   const [lastname, setLastname] = useState(null);
+  const [accountType, setAccountType] = useState(1);
   const navigate = useNavigate();
 
-  const login = useCallback((uid, token, firstname, lastname, expirationDate) => {
-    const tokenExpirationDate = expirationDate || TOKEN_EXPIRATION;
-    console.log(tokenExpirationDate);
+  const login = useCallback((uid, token, firstname, lastname, accType, expirationDate) => {
+    let TOKEN_EXPIRATION = new Date(new Date().getTime() + 1000 * 60 * 60);
+    const tokenExpirationDate = !!expirationDate ? expirationDate < new Date() ? TOKEN_EXPIRATION : expirationDate : TOKEN_EXPIRATION;
     setTokenExpirationDate(tokenExpirationDate);
     localStorage.setItem(
       LS_USER_DATA,
@@ -24,12 +25,14 @@ export const useAuth = () => {
         firstname,
         lastname,
         expiration: tokenExpirationDate.toISOString(),
+        accountType: accType
       })
     );
     setUserId(uid);
     setLastname(lastname);
     setFirstname(firstname);
     setToken(token);
+    setAccountType(accType);
     navigate("/");
   }, []);
 
@@ -44,9 +47,12 @@ export const useAuth = () => {
   }, []);
 
   useEffect(() => {
+    console.log('>>>>>>>>>>>>>')
     if (token && tokenExpirationDate) {
       const remainingTime =
         tokenExpirationDate.getTime() - new Date().getTime();
+        console.log(tokenExpirationDate.getTime());
+        console.log(new Date().getTime());
       logoutTimer = setTimeout(logout, remainingTime);
     } else {
       clearTimeout(logoutTimer);
@@ -65,10 +71,11 @@ export const useAuth = () => {
         storedData.token,
         storedData.lastname,
         storedData.firstname,
-        new Date(storedData.expiration)
+        storedData.accountType,
+        new Date(storedData.expiration),
       );
     }
   }, [login]);
 
-  return { token, login, logout, userId, lastname, firstname };
+  return { token, login, logout, userId, lastname, firstname, accountType };
 };

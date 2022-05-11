@@ -96,7 +96,7 @@ const Login = () => {
                 onChange={(e) => setEmail(e.target.value)}
               />
               <input
-                type="text"
+                type="password"
                 className="form-field"
                 onChange={(e) => setPassword(e.target.value)}
               />

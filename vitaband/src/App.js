@@ -11,6 +11,7 @@ import SnackbarContextProvider from "./shared/contexts/SnackbarContext";
 import { AnimatePresence } from "framer-motion";
 import NodeEditor from "./pages/nodeEditor/nodeEditor";
 import FeedBackElementWrapper from "./components/FeedBackElementWrapper";
+import AdminDashboard from "./pages/adminDashboard/adminDashboard";
 
 const theme = createTheme({
   palette: {
@@ -20,7 +21,7 @@ const theme = createTheme({
 });
 
 function App() {
-  const { token, login, logout, userId, firstname, lastname } = useAuth();
+  const { token, login, logout, userId, firstname, lastname, accountType } = useAuth();
   const location = useLocation();
 
   return (
@@ -39,7 +40,7 @@ function App() {
             }}
           >
             <FeedBackElementWrapper>
-              {token && (
+              {token && accountType === 1 && (
                 <AnimatePresence>
                   <Routes location={location} key={location.pathname}>
                     <Route exact path="/" element={<Homepage />} />
@@ -51,6 +52,14 @@ function App() {
                       path="/nodedetails/:nodeId"
                       element={<Nodedetails />}
                     />
+                  </Routes>
+                </AnimatePresence>
+              )}
+              {token && accountType === 2 && (
+                <AnimatePresence>
+                  <Routes location={location} key={location.pathname}>
+                    <Route exact path="/" element={<AdminDashboard />} />
+                    <Route path="/homepage" element={<AdminDashboard />} />
                   </Routes>
                 </AnimatePresence>
               )}
