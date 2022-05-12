@@ -56,7 +56,11 @@ const AdminDashboard = () => {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
     >
-      <Box>
+      <Box
+        sx={{
+          background: "#f8f8ff ",
+        }}
+      >
         <Navbar />
         <Container
           sx={{
@@ -70,10 +74,26 @@ const AdminDashboard = () => {
             sx={{ height: { xs: "initial", md: "100%" } }}
           >
             <Grid item xs={12} md={4}>
-              <Card sx={{ height: { xs: "initial", md: "100%" } }}>
+              <Card
+                sx={{
+                  height: {
+                    xs: "initial",
+                    md: "100%",
+                    boxShadow: "0px 2px 10px #d1d1d1",
+                    borderRadius: "1rem",
+                  },
+                  maxHeight: {
+                    xs: "30vh",
+                    md: "initial",
+                  },
+                }}
+              >
                 <CardHeader
                   title="Account Manager"
-                  sx={{ backgroundColor: "primary.main" }}
+                  sx={{
+                    background:
+                      "linear-gradient(333deg,rgba(85, 255, 242, 1) 0%,rgba(69, 159, 255, 1) 55%,rgba(2, 95, 254, 1) 100%)",
+                  }}
                 />
                 <CardContent>
                   {users && (
@@ -110,10 +130,26 @@ const AdminDashboard = () => {
               </Card>
             </Grid>
             <Grid item xs={12} md={4}>
-              <Card sx={{ height: { xs: "initial", md: "100%" } }}>
+              <Card
+                sx={{
+                  height: {
+                    xs: "initial",
+                    md: "100%",
+                    boxShadow: "0px 2px 10px #d1d1d1",
+                    borderRadius: "1rem",
+                  },
+                  maxHeight: {
+                    xs: "30vh",
+                    md: "initial",
+                  },
+                }}
+              >
                 <CardHeader
                   title="Node Manager"
-                  sx={{ backgroundColor: "primary.main" }}
+                  sx={{
+                    background:
+                      "linear-gradient(333deg,rgba(85, 255, 242, 1) 0%,rgba(69, 159, 255, 1) 55%,rgba(2, 95, 254, 1) 100%)",
+                  }}
                   action={
                     <Button
                       onClick={() => {
@@ -137,6 +173,7 @@ const AdminDashboard = () => {
                     <List>
                       {nodes.map((node) => (
                         <ListItem
+                          button
                           onClick={() => {
                             setTargetNode(node);
                             handleNodeOpen();
@@ -170,10 +207,26 @@ const AdminDashboard = () => {
               </Card>
             </Grid>
             <Grid item xs={12} md={4}>
-              <Card sx={{ height: { xs: "initial", md: "100%" } }}>
+              <Card
+                sx={{
+                  height: {
+                    xs: "initial",
+                    md: "100%",
+                    boxShadow: "0px 2px 10px #d1d1d1",
+                    borderRadius: "1rem",
+                  },
+                  maxHeight: {
+                    xs: "30vh",
+                    md: "initial",
+                  },
+                }}
+              >
                 <CardHeader
                   title="Gateway Manager"
-                  sx={{ backgroundColor: "primary.main" }}
+                  sx={{
+                    background:
+                      "linear-gradient(333deg,rgba(85, 255, 242, 1) 0%,rgba(69, 159, 255, 1) 55%,rgba(2, 95, 254, 1) 100%)",
+                  }}
                   action={
                     <Button
                       onClick={() => {
@@ -197,6 +250,7 @@ const AdminDashboard = () => {
                     <List>
                       {gateways.map((gateway) => (
                         <ListItem
+                          button
                           onClick={() => {
                             setTargetGateway(gateway);
                             handleGatewayOpen();

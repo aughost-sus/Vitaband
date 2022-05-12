@@ -37,7 +37,6 @@ const Homepage = () => {
     setQuery(e.target.value);
   };
 
-
   return (
     <motion.div
       className="whole"
@@ -71,15 +70,16 @@ const Homepage = () => {
                 type="text"
                 className="form-field"
                 onChange={searchHandler}
+                placeholder="Search by Node Serial"
               />
             </Grid>
-            <motion.div
-              initial={{ opacity: 0, x: "100px" }}
-              animate={{ opacity: 1, x: "0px", duration: 2 }}
-              exit={{ opacity: 0 }}
-            >
-              <Suspense fallback={<Loader />}>
-                <Grid item xs={12}>
+            <Grid item xs={12}>
+              <motion.div
+                initial={{ opacity: 0, x: "100px" }}
+                animate={{ opacity: 1, x: "0px", duration: 2 }}
+                exit={{ opacity: 0 }}
+              >
+                <Suspense fallback={<Loader />}>
                   <Grid container spacing={2}>
                     {nodes.length !== 0 &&
                       nodes.map((node) => (
@@ -142,9 +142,9 @@ const Homepage = () => {
                         </Grid>
                       ))}
                   </Grid>
-                </Grid>
-              </Suspense>
-            </motion.div>
+                </Suspense>
+              </motion.div>
+            </Grid>
           </Grid>
         </Container>
       </Box>

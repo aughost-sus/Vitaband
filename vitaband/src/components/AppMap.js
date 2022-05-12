@@ -4,8 +4,10 @@ import {
   withGoogleMap,
   GoogleMap,
   Marker,
+  InfoWindow,
 } from "react-google-maps";
 import { MAP_API } from "../utils/constants";
+import { Check, LocationOnRounded } from "@mui/icons-material";
 
 const AppMap = compose(
   withProps({
@@ -24,14 +26,35 @@ const AppMap = compose(
   >
     {props.isMarkerShown && !props.isPicker && (
       <>
-        <Marker position={props.nodeCoordinates}/>
+        <Marker
+          position={props.nodeCoordinates}
+          onMouseOver={() => props.setShowAddressInfo(true)}
+          onMouseOut={() => props.setShowAddressInfo(false)}
+          icon={{
+            url: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png",
+          }}
+        >
+          {props.showAddressInfo && (
+            <InfoWindow onCloseClick={() => props.setShowAddressInfo(false)}>
+              <div>Current Patient Location</div>
+            </InfoWindow>
+          )}
+        </Marker>
         <Marker
           position={
             props.addressCoordinates
               ? { lat: 14.830121812143584, lng: 120.80162571435547 }
               : null
           }
-        />
+          onMouseOver={() => props.setShowPatientInfo(true)}
+          onMouseOut={() => props.setShowPatientInfo(false)}
+        >
+          {props.showPatientInfo && (
+            <InfoWindow onCloseClick={() => props.setShowPatientInfo(false)}>
+              <div>Patient Address</div>
+            </InfoWindow>
+          )}
+        </Marker>
       </>
     )}
     {props.isMarkerShown && props.isPicker && (

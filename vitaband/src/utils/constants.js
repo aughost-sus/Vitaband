@@ -1,7 +1,7 @@
 const LS_USER_DATA = "userData";
-// const API_URL = "https://vitaband.herokuapp.com";
+const API_URL = "https://vitaband.herokuapp.com";
 const MAP_API = "AIzaSyBCIJfldUcipchlxKIfyinkd1JAbpVf60I";
-const API_URL = "http://localhost:8000";
+// const API_URL = "http://localhost:8000";
 const MAP_SETTINGS = {
   DEFAULT_MAP_OPTIONS: {
     scrollwheel: false,

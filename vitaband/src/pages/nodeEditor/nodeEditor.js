@@ -15,6 +15,14 @@ const NodeEditor = () => {
     lat: 14.830121812143584,
     lng: 120.80162571435547,
   });
+  const [patient, setPatient] = useState({
+    lastname: "",
+    firstname: "",
+    age: "",
+    address: "",
+    contactNo: "",
+    isMale: true
+  });
   const [nodeSerial, setNodeSerial] = useState("");
   const [isNew, setIsNew] = useState(true);
   const { snackbarDispatch } = useContext(SnackbarContext);
@@ -28,9 +36,24 @@ const NodeEditor = () => {
       console.log(state);
       if (!state.isNew) {
         setNodeSerial(state.nodeSerial);
+        if (state && state.patient) {
+          setPatient({
+            lastname: state.patient.lastname,
+            firstname: state.patient.firstname,
+            age: state.patient.age,
+            address: state.patient.address,
+            contactNo: state.patient.contactNo,
+            isMale: state.patient.isMale
+          });
+        }
       }
     }
-    if (state && state.patient && state.patient.latitude && state.patient.longitude) {
+    if (
+      state &&
+      state.patient &&
+      state.patient.latitude &&
+      state.patient.longitude
+    ) {
       setLocation({
         lat: state.patient.latitude,
         lng: state.patient.longitude,
@@ -78,7 +101,7 @@ const NodeEditor = () => {
         {
           nodeSerial,
           patient: checkPatient(e),
-          nodeId: state.nodeId,
+          _id: state.nodeId,
         },
         loadingDispatch,
         snackbarDispatch,
@@ -151,15 +174,15 @@ const NodeEditor = () => {
                     className="node-form-field"
                     placeholder=" Surname"
                     name="lastname"
-                    value={state && state.patient ? state.patient.lastname : ""}
+                    value={patient.lastname}
+                    onChange={(e) => setPatient((patient) => ({...patient, lastname: e.target.value}))}
                   />
                   <input
                     className="node-form-field"
                     placeholder=" First Name"
                     name="firstname"
-                    value={
-                      state && state.patient ? state.patient.firstname : ""
-                    }
+                    value={patient.firstname}
+                    onChange={(e) => setPatient((patient) => ({...patient, firstname: e.target.value}))}
                   />
                 </div>
               </div>
@@ -177,7 +200,8 @@ const NodeEditor = () => {
                     className="node-form-field"
                     placeholder="Age"
                     name="age"
-                    value={state && state.patient ? state.patient.age : ""}
+                    value={patient.age}
+                    onChange={(e) => setPatient((patient) => ({...patient, age: e.target.value}))}
                   />
                 </div>
                 <div className="form-input">
@@ -188,6 +212,8 @@ const NodeEditor = () => {
                     className="radio-input"
                     id="male"
                     value="Male"
+                    checked={patient.isMale}
+                    onChange={(e) => setPatient((patient) => ({...patient, isMale: e.target.value === 'Male'}))}
                   />
                   <label for="male">Male</label>
                   <input
@@ -196,6 +222,8 @@ const NodeEditor = () => {
                     className="radio-input"
                     id="female"
                     value="Female"
+                    checked={!patient.isMale}
+                    onChange={(e) => setPatient((patient) => ({...patient, isMale: e.target.value === 'Male'}))}
                   />
                   <label for="female">Female</label>
                 </div>
@@ -206,7 +234,8 @@ const NodeEditor = () => {
                   className="node-form-field"
                   placeholder="Complete Address"
                   name="address"
-                  value={state && state.patient ? state.patient.address : ""}
+                  value={patient.address}
+                  onChange={(e) => setPatient((patient) => ({...patient, address: e.target.value}))}
                 />
               </div>
               <div className="form-input">
@@ -216,7 +245,8 @@ const NodeEditor = () => {
                   className="node-form-field"
                   placeholder="Contact No"
                   name="contactNo"
-                  value={state && state.patient ? state.patient.contactNo : ""}
+                  value={patient.contactNo}
+                  onChange={(e) => setPatient((patient) => ({...patient, contactNo: e.target.value}))}
                 />
               </div>
               <div className="form-input">

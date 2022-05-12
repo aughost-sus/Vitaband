@@ -23,6 +23,22 @@
   color: #080fff;
 }
 
+.alert-background {
+  background: linear-gradient(
+    333deg,
+    rgb(255, 146, 146) 0%,
+    rgb(255, 81, 81) 55%,
+    rgb(254, 2, 2) 100%
+  );
+}
+
+.alert-background > span {
+  color: white !important;
+}
+
+.alert-background > h3 {
+  color: white !important;
+}
 /* .status span {
   color: white;
   font-size: 2rem;
@@ -34,16 +50,21 @@
   display: flex;
   justify-content: space-between;
   width: 100%;
-  background: linear-gradient(333deg, rgba(85,255,242,1) 0%, rgba(69,159,255,1) 55%, rgba(2,95,254,1) 100%);
+  background: linear-gradient(
+    333deg,
+    rgba(85, 255, 242, 1) 0%,
+    rgba(69, 159, 255, 1) 55%,
+    rgba(2, 95, 254, 1) 100%
+  );
   border-radius: 2rem;
   height: 6rem;
   padding: 1rem;
   box-sizing: border-box;
-  transition: all .2s ease-in-out;
+  transition: all 0.2s ease-in-out;
 }
 
 .status-bar:hover {
-  transform: scale(1.03); 
+  transform: scale(1.03);
 }
 
 .patient-details {
@@ -113,15 +134,16 @@
 }
 .nodename p {
   color: #575757;
-  font-size: 1rem;
+  font-size: 1.5rem;
   font-family: "Montserrat", sans-serif;
-  padding-right: 1rem;
+  padding-left: 0.2rem;
   font-weight: bold;
+  margin: 0;
 }
 
 .nodename span {
   color: #575757;
-  font-size: 4rem;
+  font-size: 2rem;
   font-family: "Montserrat", sans-serif;
   font-weight: lighter;
   left: 0;
@@ -189,7 +211,7 @@
   -webkit-box-shadow: -5px 5px 4px rgba(0, 0, 0, 0.3);
   -moz-box-shadow: -5px 5px 4px rgba(0, 0, 0, 0.3);
   cursor: pointer;
-  transition: all .2s ease-in-out;
+  transition: all 0.2s ease-in-out;
 }
 
 .vital_box h3 {
@@ -215,7 +237,12 @@
 }
 
 .vital_box:hover {
-  background: linear-gradient(333deg, rgba(85,255,242,1) 0%, rgba(69,159,255,1) 55%, rgba(2,95,254,1) 100%);
-  transform: scale(1.03); 
+  background: linear-gradient(
+    333deg,
+    rgba(85, 255, 242, 1) 0%,
+    rgba(69, 159, 255, 1) 55%,
+    rgba(2, 95, 254, 1) 100%
+  );
+  transform: scale(1.03);
   color: white;
 }

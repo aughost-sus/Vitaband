@@ -9,8 +9,9 @@ import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { motion } from "framer-motion";
 import { SnackbarContext } from "../../shared/contexts/SnackbarContext";
 import { LoadingContext } from "../../shared/contexts/LoadingContext";
-import { Box, Button, Container, Grid, Stack } from "@mui/material";
+import { Box, Button, Card, Container, Grid, Stack } from "@mui/material";
 import {
+  Battery90Rounded,
   ChevronLeftRounded,
   DeleteForeverRounded,
   EditRounded,
@@ -29,6 +30,8 @@ const Nodedetails = () => {
   const { nodeId } = useParams();
   const { state } = useLocation();
   const [trigger, setTrigger] = useState(false);
+  const [showAddressInfo, setShowAddressInfo] = useState(false);
+  const [showPatientInfo, setShowPatientInfo] = useState(false);
 
   const formatData = () => {
     let labels = [];
@@ -58,6 +61,28 @@ const Nodedetails = () => {
       }
     }
     return false;
+  };
+
+  const checkTemperature = (temp) => {
+    if (temp > 38) return { label: "High Body Temperature", control: true };
+    if (temp < 36) return { label: "Low Body Temperature", control: true };
+    return { label: "", control: false };
+  };
+
+  const checkSpo2 = (spo2) => {
+    if (spo2 < 95) return { label: "Below Normal", control: true };
+    return { label: "", control: false };
+  };
+
+  const checkHeartRate = (hr) => {
+    if (hr > 100) return { label: "High Heart beat", control: true };
+    if (hr < 60) return { label: "Low Heart beat", control: true };
+    return { label: "", control: false };
+  };
+
+  const checkCough = (cf) => {
+    if (cf > 5) return { label: "Frequent coughs", control: true };
+    return { label: "", control: false };
   };
 
   const isWear = () => {
@@ -91,7 +116,9 @@ const Nodedetails = () => {
   const socketHandler = (data) => {
     setReadings((readings) => {
       let newReadings = [...readings];
-      newReadings.shift();
+      if (newReadings.length === 15) {
+        newReadings.shift();
+      }
       newReadings.push(data.reading);
       return newReadings;
     });
@@ -102,7 +129,7 @@ const Nodedetails = () => {
       {
         nodeSerial: node.nodeSerial,
         patient: null,
-        nodeId,
+        _id: nodeId,
       },
       loadingDispatch,
       snackbarDispatch,
@@ -184,8 +211,21 @@ const Nodedetails = () => {
                   <span>{isWear() ? "" : " - NOT WORN"}</span>
                 </div>
                 <div className="nodename">
-                  <p>NODE</p>
-                  <span>03</span>
+                  {node && (
+                    <Stack direction="column" justifyContent="center">
+                      <span>{`NODE ${node.nodeSerial}`}</span>
+                      {readings.length !== 0 && (
+                        <Stack
+                          direction="row"
+                          justifyContent="center"
+                          alignItems="center"
+                        >
+                          <Battery90Rounded />
+                          <p>{`${readings.at(-1).battery} %`}</p>
+                        </Stack>
+                      )}
+                    </Stack>
+                  )}
                 </div>
               </div>
             </Grid>
@@ -221,27 +261,35 @@ const Nodedetails = () => {
             </Grid>
             <Grid item xs={12} md={6}>
               {node && node.patient && readings.length !== 0 && (
-                <AppMap
-                  isPicker={false}
-                  isMarkerShown={true}
-                  target={{
-                    lat: readings.at(-1).lat,
-                    lng: readings.at(-1).lng,
-                  }}
-                  nodeCoordinates={{
-                    lat: readings.at(-1).lat,
-                    lng: readings.at(-1).lng,
-                  }}
-                  addressCoordinates={
-                    node.patient.longitude && node.patient.latitude
-                      ? {
-                          lat: node.patient.latitude,
-                          lng: node.patient.longitude,
-                        }
-                      : null
-                  }
-                  onMapClick={(ev) => {}}
-                />
+                <Card
+                  sx={{ height: "100%", width: "100%", borderRadius: "1rem" }}
+                >
+                  <AppMap
+                    isPicker={false}
+                    isMarkerShown={true}
+                    target={{
+                      lat: readings.at(-1).lat,
+                      lng: readings.at(-1).lng,
+                    }}
+                    nodeCoordinates={{
+                      lat: readings.at(-1).lat,
+                      lng: readings.at(-1).lng,
+                    }}
+                    addressCoordinates={
+                      node.patient.longitude && node.patient.latitude
+                        ? {
+                            lat: node.patient.latitude,
+                            lng: node.patient.longitude,
+                          }
+                        : null
+                    }
+                    showPatientInfo={showPatientInfo}
+                    showAddressInfo={showAddressInfo}
+                    setShowAddressInfo={setShowAddressInfo}
+                    setShowPatientInfo={setShowPatientInfo}
+                    onMapClick={(ev) => {}}
+                  />
+                </Card>
               )}
             </Grid>
             <Grid item xs={12}>
@@ -256,34 +304,82 @@ const Nodedetails = () => {
               <>
                 <Grid item xs={6} md={3}>
                   <div
-                    className="vital_box"
+                    className={`vital_box ${
+                      checkTemperature(readings.at(-1).temperature).control
+                        ? "alert-background"
+                        : ""
+                    }`}
                     onClick={() => setVital("temperature")}
                   >
                     <h3>TEMPERATURE:</h3>
-                    <span>{readings.at(-1).temperature} </span>
-                  </div>
-                </Grid>
-                <Grid item xs={6} md={3}>
-                  <div className="vital_box" onClick={() => setVital("spo2")}>
-                    <h3>OXYGEN LEVEL:</h3>
-                    <span>{readings.at(-1).spo2}</span>
+                    <span>
+                      {readings.at(-1).temperature === -999
+                        ? "Reading..."
+                        : `${readings.at(-1).temperature} °C`}{" "}
+                    </span>
+                    <h3>
+                      {checkTemperature(readings.at(-1).temperature).label}
+                    </h3>
                   </div>
                 </Grid>
                 <Grid item xs={6} md={3}>
                   <div
-                    className="vital_box"
-                    onClick={() => setVital("heartRate")}
+                    className={`vital_box ${
+                      checkSpo2(readings.at(-1).spo2).control
+                        ? "alert-background"
+                        : ""
+                    }`}
+                    onClick={() => setVital("spo2")}
                   >
-                    <h3>PULSE RATE:</h3>
-                    <span>{readings.at(-1).heartRate}</span>
+                    <h3>OXYGEN LEVEL:</h3>
+                    <span>
+                      {readings.at(-1).spo2 === -999
+                        ? "Reading..."
+                        : `${Math.round(readings.at(-1).spo2)} %`}
+                    </span>
+                    <h3>{checkSpo2(readings.at(-1).spo2).label}</h3>
                   </div>
                 </Grid>
                 <Grid item xs={6} md={3}>
-                  <div className="vital_box" onClick={() => setVital("cough")}>
+                  <div
+                    className={`vital_box ${
+                      checkHeartRate(readings.at(-1).heartRate).control
+                        ? "alert-background"
+                        : ""
+                    }`}
+                    onClick={() => setVital("heartRate")}
+                  >
+                    <h3>HEART RATE:</h3>
+                    <span>{`${readings.at(-1).heartRate} BPM`}</span>
+                    <h3>{checkHeartRate(readings.at(-1).heartRate).label}</h3>
+                  </div>
+                </Grid>
+                <Grid item xs={6} md={3}>
+                  <div
+                    className={`vital_box ${
+                      checkCough(
+                        readings
+                          .map((item) => item.cough)
+                          .reduce((a, b) => a + b)
+                      ).control
+                        ? "alert-background"
+                        : ""
+                    }`}
+                    onClick={() => setVital("cough")}
+                  >
                     <h3>COUGH FREQUENCY:</h3>
                     <span>{`${readings
                       .map((item) => item.cough)
                       .reduce((a, b) => a + b)} coughs / min`}</span>
+                    <h3>
+                      {
+                        checkCough(
+                          readings
+                            .map((item) => item.cough)
+                            .reduce((a, b) => a + b)
+                        ).label
+                      }
+                    </h3>
                   </div>
                 </Grid>
               </>
