@@ -36,16 +36,12 @@ const AppMap = compose(
         >
           {props.showAddressInfo && (
             <InfoWindow onCloseClick={() => props.setShowAddressInfo(false)}>
-              <div>Current Patient Location</div>
+              <div>Current Node Location</div>
             </InfoWindow>
           )}
         </Marker>
         <Marker
-          position={
-            props.addressCoordinates
-              ? { lat: 14.830121812143584, lng: 120.80162571435547 }
-              : null
-          }
+          position={props.addressCoordinates}
           onMouseOver={() => props.setShowPatientInfo(true)}
           onMouseOut={() => props.setShowPatientInfo(false)}
         >

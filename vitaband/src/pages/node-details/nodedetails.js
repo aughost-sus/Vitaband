@@ -9,7 +9,16 @@ import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { motion } from "framer-motion";
 import { SnackbarContext } from "../../shared/contexts/SnackbarContext";
 import { LoadingContext } from "../../shared/contexts/LoadingContext";
-import { Box, Button, Card, Container, Grid, Stack } from "@mui/material";
+import {
+  Box,
+  Button,
+  Card,
+  Container,
+  Grid,
+  Stack,
+  CardHeader,
+  Typography,
+} from "@mui/material";
 import {
   Battery90Rounded,
   ChevronLeftRounded,
@@ -94,6 +103,26 @@ const Nodedetails = () => {
     return false;
   };
 
+  const degreesToRadians = (degrees) => {
+    return (degrees * Math.PI) / 180;
+  };
+
+  const distanceInKmBetweenEarthCoordinates = (lat1, lon1, lat2, lon2) => {
+    var earthRadiusKm = 6371;
+
+    var dLat = degreesToRadians(lat2 - lat1);
+    var dLon = degreesToRadians(lon2 - lon1);
+
+    lat1 = degreesToRadians(lat1);
+    lat2 = degreesToRadians(lat2);
+
+    var a =
+      Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+      Math.sin(dLon / 2) * Math.sin(dLon / 2) * Math.cos(lat1) * Math.cos(lat2);
+    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    return earthRadiusKm * c;
+  };
+
   useEffect(() => {
     API.getNode(
       nodeId,
@@ -148,7 +177,7 @@ const Nodedetails = () => {
     >
       <Box>
         <Navbar />
-        <Container>
+        <Container sx={{ marginBottom: "2rem" }}>
           <Stack direction="row" justifyContent="space-between">
             <Button
               startIcon={<ChevronLeftRounded />}
@@ -208,7 +237,7 @@ const Nodedetails = () => {
                     style={{ background: isActive() ? "Chartreuse" : "red" }}
                   />
                   <span>{isActive() ? "ACTIVE " : "OFFLINE "}</span>
-                  <span>{isWear() ? "" : " - NOT WORN"}</span>
+                  <span>{isWear() ? "" : isActive() ? " - NOT WORN" : ""}</span>
                 </div>
                 <div className="nodename">
                   {node && (
@@ -252,8 +281,10 @@ const Nodedetails = () => {
               )}
               {node && !node.patient && (
                 <Box
-                  sx={{ paddingLeft: { xs: "0rem", sm: "4rem" } }}
-                  className="patient-details"
+                  sx={{
+                    paddingLeft: { xs: "0rem", sm: "4rem" },
+                    margin: "2rem 0",
+                  }}
                 >
                   <h1>No Patient Associated</h1>
                 </Box>
@@ -261,8 +292,116 @@ const Nodedetails = () => {
             </Grid>
             <Grid item xs={12} md={6}>
               {node && node.patient && readings.length !== 0 && (
+                <>
+                  <Card
+                    sx={{
+                      height: "100%",
+                      width: "100%",
+                      borderRadius: "1rem",
+                      minHeight: "15rem",
+                    }}
+                  >
+                    <AppMap
+                      isPicker={false}
+                      isMarkerShown={true}
+                      target={{
+                        lat: readings.at(-1).lat,
+                        lng: readings.at(-1).lng,
+                      }}
+                      nodeCoordinates={{
+                        lat: readings.at(-1).lat,
+                        lng: readings.at(-1).lng,
+                      }}
+                      addressCoordinates={
+                        node.patient.longitude && node.patient.latitude
+                          ? {
+                              lat: node.patient.latitude,
+                              lng: node.patient.longitude,
+                            }
+                          : null
+                      }
+                      showPatientInfo={showPatientInfo}
+                      showAddressInfo={showAddressInfo}
+                      setShowAddressInfo={setShowAddressInfo}
+                      setShowPatientInfo={setShowPatientInfo}
+                      onMapClick={(ev) => {}}
+                    />
+                  </Card>
+                  <div
+                    className={`map-interpretation ${
+                      distanceInKmBetweenEarthCoordinates(
+                        readings.at(-1).lat,
+                        readings.at(-1).lng,
+                        node.patient.latitude,
+                        node.patient.longitude
+                      ) > 0.03
+                        ? "alert-background"
+                        : ""
+                    }`}
+                  >
+                    <div>{`Displacement: ${Math.round(
+                      distanceInKmBetweenEarthCoordinates(
+                        readings.at(-1).lat,
+                        readings.at(-1).lng,
+                        node.patient.latitude,
+                        node.patient.longitude
+                      ) * 1000
+                    )} m`}</div>
+                    {distanceInKmBetweenEarthCoordinates(
+                      readings.at(-1).lat,
+                      readings.at(-1).lng,
+                      node.patient.latitude,
+                      node.patient.longitude
+                    ) > 0.03 && (
+                      <div>Patient is out of designated location</div>
+                    )}
+                  </div>
+                </>
+              )}
+              {node && node.patient && readings.length === 0 && (
                 <Card
-                  sx={{ height: "100%", width: "100%", borderRadius: "1rem" }}
+                  sx={{
+                    height: "100%",
+                    width: "100%",
+                    borderRadius: "1rem",
+                    minHeight: "15rem",
+                  }}
+                >
+                  <AppMap
+                    isPicker={false}
+                    isMarkerShown={true}
+                    target={{
+                      lat: node.patient.latitude,
+                      lng: node.patient.longitude,
+                    }}
+                    nodeCoordinates={{
+                      lat: node.patient.latitude,
+                      lng: node.patient.longitude,
+                    }}
+                    addressCoordinates={
+                      node.patient.longitude && node.patient.latitude
+                        ? {
+                            lat: node.patient.latitude,
+                            lng: node.patient.longitude,
+                          }
+                        : null
+                    }
+                    showPatientInfo={showPatientInfo}
+                    showAddressInfo={showAddressInfo}
+                    setShowAddressInfo={setShowAddressInfo}
+                    setShowPatientInfo={setShowPatientInfo}
+                    onMapClick={(ev) => {}}
+                  />
+                </Card>
+              )}
+              {node && !node.patient && readings.length !== 0 && (
+                <Card
+                  sx={{
+                    height: "100%",
+                    width: "100%",
+                    borderRadius: "1rem",
+                    minHeight: "15rem",
+                  }}
                 >
                   <AppMap
                     isPicker={false}
@@ -275,14 +414,33 @@ const Nodedetails = () => {
                       lat: readings.at(-1).lat,
                       lng: readings.at(-1).lng,
                     }}
-                    addressCoordinates={
-                      node.patient.longitude && node.patient.latitude
-                        ? {
-                            lat: node.patient.latitude,
-                            lng: node.patient.longitude,
-                          }
-                        : null
-                    }
+                    addressCoordinates={null}
+                    showPatientInfo={showPatientInfo}
+                    showAddressInfo={showAddressInfo}
+                    setShowAddressInfo={setShowAddressInfo}
+                    setShowPatientInfo={setShowPatientInfo}
+                    onMapClick={(ev) => {}}
+                  />
+                </Card>
+              )}
+              {node && !node.patient && readings.length === 0 && (
+                <Card
+                  sx={{
+                    height: "100%",
+                    width: "100%",
+                    borderRadius: "1rem",
+                    minHeight: "15rem",
+                  }}
+                >
+                  <AppMap
+                    isPicker={false}
+                    isMarkerShown={true}
+                    target={{
+                      lat: 14.8533996,
+                      lng: 120.814692,
+                    }}
+                    nodeCoordinates={null}
+                    addressCoordinates={null}
                     showPatientInfo={showPatientInfo}
                     showAddressInfo={showAddressInfo}
                     setShowAddressInfo={setShowAddressInfo}
@@ -389,6 +547,7 @@ const Nodedetails = () => {
                 {readings.length !== 0 && (
                   <LineChart chartData={formatData()} />
                 )}
+                {readings.length === 0 && <span>No readings recorded</span>}
               </div>
             </Grid>
           </Grid>
