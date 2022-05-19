@@ -46,7 +46,7 @@ const Homepage = () => {
     >
       <Box>
         <Navbar />
-        <Container>
+        <Container sx={{paddingBottom: '2rem'}}>
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <Stack direction="row" sx={{ padding: "1rem" }}>

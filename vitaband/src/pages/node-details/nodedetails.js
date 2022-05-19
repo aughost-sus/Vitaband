@@ -63,6 +63,53 @@ const Nodedetails = () => {
     };
   };
 
+  const scaler = () => {
+    switch (vital) {
+      case "temperature":
+        return {
+          scales: {
+            y: {
+              min: 20,
+              max: 45,
+              stepSize: 5,
+            },
+          },
+        };
+      case "heartRate":
+        return {
+          scales: {
+            y: {
+              min: 0,
+              max: 155,
+              stepSize: 5,
+            },
+          },
+        };
+      case "spo2":
+        return {
+          scales: {
+            y: {
+              min: 0,
+              max: 105,
+              stepSize: 5,
+            },
+          },
+        };
+      case "cough":
+        return {
+          scales: {
+            y: {
+              min: 0,
+              max: 2,
+              stepSize: 1,
+            },
+          },
+        };
+      default:
+        return {};
+    }
+  };
+
   const isActive = () => {
     if (readings.length !== 0) {
       if (Math.abs(new Date() - new Date(readings.at(-1).datetime)) < 6000) {
@@ -73,13 +120,13 @@ const Nodedetails = () => {
   };
 
   const checkTemperature = (temp) => {
-    if (temp > 38) return { label: "High Body Temperature", control: true };
-    if (temp < 36) return { label: "Low Body Temperature", control: true };
+    if (temp > 38) return { label: "High Temperature", control: true };
+    if (temp < 36) return { label: "Low Temperature", control: true };
     return { label: "", control: false };
   };
 
   const checkSpo2 = (spo2) => {
-    if (spo2 < 95) return { label: "Below Normal", control: true };
+    if (spo2 < 90) return { label: "Below Normal", control: true };
     return { label: "", control: false };
   };
 
@@ -292,71 +339,75 @@ const Nodedetails = () => {
             </Grid>
             <Grid item xs={12} md={6}>
               {node && node.patient && readings.length !== 0 && (
-                <>
-                  <Card
-                    sx={{
-                      height: "100%",
-                      width: "100%",
-                      borderRadius: "1rem",
-                      minHeight: "15rem",
-                    }}
-                  >
-                    <AppMap
-                      isPicker={false}
-                      isMarkerShown={true}
-                      target={{
-                        lat: readings.at(-1).lat,
-                        lng: readings.at(-1).lng,
+                <Grid container>
+                  <Grid item xs={12}>
+                    <Card
+                      sx={{
+                        height: "100%",
+                        width: "100%",
+                        borderRadius: "1rem",
+                        minHeight: "15rem",
                       }}
-                      nodeCoordinates={{
-                        lat: readings.at(-1).lat,
-                        lng: readings.at(-1).lng,
-                      }}
-                      addressCoordinates={
-                        node.patient.longitude && node.patient.latitude
-                          ? {
-                              lat: node.patient.latitude,
-                              lng: node.patient.longitude,
-                            }
-                          : null
-                      }
-                      showPatientInfo={showPatientInfo}
-                      showAddressInfo={showAddressInfo}
-                      setShowAddressInfo={setShowAddressInfo}
-                      setShowPatientInfo={setShowPatientInfo}
-                      onMapClick={(ev) => {}}
-                    />
-                  </Card>
-                  <div
-                    className={`map-interpretation ${
-                      distanceInKmBetweenEarthCoordinates(
+                    >
+                      <AppMap
+                        isPicker={false}
+                        isMarkerShown={true}
+                        target={{
+                          lat: readings.at(-1).lat,
+                          lng: readings.at(-1).lng,
+                        }}
+                        nodeCoordinates={{
+                          lat: readings.at(-1).lat,
+                          lng: readings.at(-1).lng,
+                        }}
+                        addressCoordinates={
+                          node.patient.longitude && node.patient.latitude
+                            ? {
+                                lat: node.patient.latitude,
+                                lng: node.patient.longitude,
+                              }
+                            : null
+                        }
+                        showPatientInfo={showPatientInfo}
+                        showAddressInfo={showAddressInfo}
+                        setShowAddressInfo={setShowAddressInfo}
+                        setShowPatientInfo={setShowPatientInfo}
+                        onMapClick={(ev) => {}}
+                      />
+                    </Card>
+                  </Grid>
+                  <Grid item xs={12}>
+                    <div
+                      className={`map-interpretation ${
+                        distanceInKmBetweenEarthCoordinates(
+                          readings.at(-1).lat,
+                          readings.at(-1).lng,
+                          node.patient.latitude,
+                          node.patient.longitude
+                        ) > 0.03
+                          ? "alert-background"
+                          : ""
+                      }`}
+                    >
+                      <div>{`Displacement: ${Math.round(
+                        distanceInKmBetweenEarthCoordinates(
+                          readings.at(-1).lat,
+                          readings.at(-1).lng,
+                          node.patient.latitude,
+                          node.patient.longitude
+                        ) * 1000
+                      )} m`}</div>
+                      {distanceInKmBetweenEarthCoordinates(
                         readings.at(-1).lat,
                         readings.at(-1).lng,
                         node.patient.latitude,
                         node.patient.longitude
-                      ) > 0.03
-                        ? "alert-background"
-                        : ""
-                    }`}
-                  >
-                    <div>{`Displacement: ${Math.round(
-                      distanceInKmBetweenEarthCoordinates(
-                        readings.at(-1).lat,
-                        readings.at(-1).lng,
-                        node.patient.latitude,
-                        node.patient.longitude
-                      ) * 1000
-                    )} m`}</div>
-                    {distanceInKmBetweenEarthCoordinates(
-                      readings.at(-1).lat,
-                      readings.at(-1).lng,
-                      node.patient.latitude,
-                      node.patient.longitude
-                    ) > 0.03 && (
-                      <div>Patient is out of designated location</div>
-                    )}
-                  </div>
-                </>
+                      ) > 0.03 && (
+                        <div>Patient is out of designated location</div>
+                      )}
+                    </div>
+                  </Grid>
+                </Grid>
               )}
               {node && node.patient && readings.length === 0 && (
                 <Card
@@ -508,7 +559,11 @@ const Nodedetails = () => {
                     onClick={() => setVital("heartRate")}
                   >
                     <h3>HEART RATE:</h3>
-                    <span>{`${readings.at(-1).heartRate} BPM`}</span>
+                    <span>
+                      {readings.at(-1).heartRate === -999
+                        ? "Reading..."
+                        : `${readings.at(-1).heartRate} BPM`}
+                    </span>
                     <h3>{checkHeartRate(readings.at(-1).heartRate).label}</h3>
                   </div>
                 </Grid>
@@ -525,8 +580,14 @@ const Nodedetails = () => {
                     }`}
                     onClick={() => setVital("cough")}
                   >
-                    <h3>COUGH FREQUENCY:</h3>
-                    <span>{`${readings
+                    <h3 style={{ textAlign: "center" }}>COUGH FREQUENCY:</h3>
+                    <span
+                      style={{
+                        wordWrap: "wrap",
+                        fontSize: "1.5rem",
+                        textAlign: "center",
+                      }}
+                    >{`${readings
                       .map((item) => item.cough)
                       .reduce((a, b) => a + b)} coughs / min`}</span>
                     <h3>
@@ -545,7 +606,7 @@ const Nodedetails = () => {
             <Grid item xs={12}>
               <div className="graph">
                 {readings.length !== 0 && (
-                  <LineChart chartData={formatData()} />
+                  <LineChart chartData={formatData()} options={scaler()} />
                 )}
                 {readings.length === 0 && <span>No readings recorded</span>}
               </div>
