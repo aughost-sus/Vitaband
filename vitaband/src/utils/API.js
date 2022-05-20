@@ -75,6 +75,9 @@ const signup = async (
   );
   if (response.status === 200) {
     callback();
+  }
+  if (response.status === 422) {
+    errorCallback(response.data.data[0].msg);
   } else {
     errorCallback("Failed to Sign Up");
   }
@@ -127,6 +130,15 @@ const addNode = async (node, loadingDispatch, snackbarDispatch, backToHome) => {
       },
     });
     backToHome();
+  } else if (response.status === 422) {
+    snackbarDispatch({
+      type: "SET_PARAMS",
+      payload: {
+        message: response.data.data[0].msg,
+        isOpen: true,
+        severity: "error",
+      },
+    });
   } else {
     snackbarDispatch({
       type: "SET_PARAMS",
@@ -190,6 +202,15 @@ const editNode = async (
       },
     });
     backToHome();
+  } else if (response.status === 422) {
+    snackbarDispatch({
+      type: "SET_PARAMS",
+      payload: {
+        message: response.data.data[0].msg,
+        isOpen: true,
+        severity: "error",
+      },
+    });
   } else {
     snackbarDispatch({
       type: "SET_PARAMS",
